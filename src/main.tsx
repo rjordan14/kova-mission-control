@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ChevronRight, CircleHelp, Copy, ExternalLink, Plus, RotateCcw, Share2, X } from 'lucide-react'
 import seed from '../handoff/seed.json'
 import './styles.css'
@@ -148,3 +149,5 @@ function PlanView({ seedPlan, tasks, onToggle, onOpenWeek, onAdd, newTask, setNe
 function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: React.ReactNode }) { return <div className="modal-backdrop" onClick={onClose}><div className="modal" onClick={(event) => event.stopPropagation()}><div className="modal-title"><h2>{title}</h2><button onClick={onClose}><X size={18} /></button></div>{children}</div></div> }
 
 export default App
+
+createRoot(document.getElementById('root')!).render(<App />)
