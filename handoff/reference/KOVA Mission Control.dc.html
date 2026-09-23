@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; background: oklch(0.15 0.008 70); }
+a { color: oklch(0.75 0.12 85); text-decoration: none; }
+a:hover { color: oklch(0.85 0.12 85); }
+input, textarea { font-family: Archivo, sans-serif; }
+input::placeholder, textarea::placeholder { color: oklch(0.5 0.012 75); }
+@keyframes kv-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+</style>
+</helmet>
+<div style="min-height: 100vh; background: oklch(0.15 0.008 70); color: oklch(0.92 0.01 80); font-family: Archivo, sans-serif; padding: 40px 48px 56px;">
+
+  <!-- Top bar -->
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.18em;">KOVA</div>
+        <div style="width: 6px; height: 6px; border-radius: 50%; background: oklch(0.75 0.12 85);"></div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.62 0.015 75); text-transform: uppercase;">45-day sprint &middot; mission control</div>
+      </div>
+      <div style="font-size: 14px; color: oklch(0.62 0.015 75);">September 14 &rarr; October 28 &middot; wireframe locked September 25 &middot; UI/UX production-ready October 16 &middot; raise opens the last week of October</div>
+    </div>
+    <div style="display: flex; align-items: stretch; gap: 12px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 14px; padding: 12px 20px; border: 1px solid oklch(0.28 0.012 70); border-radius: 10px; background: oklch(0.18 0.01 70);">
+        <svg width="52" height="52" viewBox="0 0 52 52">
+          <circle cx="26" cy="26" r="22" fill="none" stroke="oklch(0.26 0.012 70)" stroke-width="5"></circle>
+          <circle cx="26" cy="26" r="22" fill="none" stroke="oklch(0.75 0.12 85)" stroke-width="5" stroke-linecap="round" stroke-dasharray="138.23" stroke-dashoffset="{{ ringOffset }}" transform="rotate(-90 26 26)"></circle>
+        </svg>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 30px; line-height: 1; color: oklch(0.75 0.12 85);">{{ daysLeft }}</div>
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.62 0.015 75); text-transform: uppercase;">days to Oct 28 &middot; first pitch</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 12px 20px; border: 1px solid oklch(0.28 0.012 70); border-radius: 10px; background: oklch(0.18 0.01 70);">
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 30px; line-height: 1;">{{ freezeLabel }}</div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.62 0.015 75); text-transform: uppercase;">days to UI/UX ready</div>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 12px 20px; border: 1px solid oklch(0.28 0.012 70); border-radius: 10px; background: oklch(0.18 0.01 70);">
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 30px; line-height: 1;">{{ sprintDayLabel }}</div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.62 0.015 75); text-transform: uppercase;">{{ sprintDaySub }}</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 12px 20px; border: 1px solid {{ statusBorder }}; border-radius: 10px; background: oklch(0.18 0.01 70);">
+        <div style="width: 9px; height: 9px; border-radius: 50%; background: {{ statusColor }}; animation: kv-pulse 2.6s ease-in-out infinite;"></div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: {{ statusColor }};">{{ statusLabel }}</div>
+      </div>
+      <button onClick="{{ openReview }}" style="padding: 12px 20px; border: 1px solid oklch(0.4 0.06 85); border-radius: 10px; background: oklch(0.22 0.02 85); color: oklch(0.8 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="background: oklch(0.26 0.03 85);">Weekly review</button>
+      <button onClick="{{ startWalk }}" style="padding: 12px 20px; border: 1px solid oklch(0.32 0.02 80); border-radius: 10px; background: oklch(0.18 0.01 70); color: oklch(0.78 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="background: oklch(0.22 0.012 70); border-color: oklch(0.4 0.06 85);">&#9654; Walkthrough</button>
+      <button onClick="{{ openShare }}" style="padding: 12px 20px; border: 1px solid oklch(0.32 0.02 80); border-radius: 10px; background: oklch(0.18 0.01 70); color: oklch(0.78 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="background: oklch(0.22 0.012 70); border-color: oklch(0.4 0.06 85);">Share</button>
+    </div>
+  </div>
+
+  <!-- The rule -->
+  <div style="display: flex; align-items: center; gap: 14px; margin-top: 24px; padding: 14px 20px; border: 1px solid oklch(0.34 0.05 85); border-radius: 10px; background: oklch(0.19 0.015 85);">
+    <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.75 0.12 85); text-transform: uppercase; flex-shrink: 0;">The rule</div>
+    <div style="font-size: 14px; color: oklch(0.85 0.02 82); line-height: 1.5;">Every workstream must answer: <span style="font-weight: 600;">&ldquo;How does this help us create, understand, or communicate the evidence from our first twenty users?&rdquo;</span> If it doesn&rsquo;t, push it behind the fundraise.</div>
+  </div>
+
+  <!-- Week switcher + owner filter -->
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 32px;">
+    <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+      <div style="display: flex; border: 1px solid oklch(0.28 0.012 70); border-radius: 8px; overflow: hidden; margin-right: 8px;">
+        <button onClick="{{ pickWeekView }}" style="padding: 8px 13px; border: none; background: {{ vwBg }}; color: {{ vwColor }}; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;">This week</button>
+        <button onClick="{{ pickPlanView }}" style="padding: 8px 13px; border: none; border-left: 1px solid oklch(0.28 0.012 70); background: {{ vpBg }}; color: {{ vpColor }}; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;">Full plan</button>
+        <button onClick="{{ pickTodayView }}" style="padding: 8px 13px; border: none; border-left: 1px solid oklch(0.28 0.012 70); background: {{ vtBg }}; color: {{ vtColor }}; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;">Today</button>
+      </div>
+      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="9">
+        <button onClick="{{ w.pick }}" style="padding: 8px 13px; border: 1px solid {{ w.border }}; border-radius: 8px; background: {{ w.bg }}; color: {{ w.color }}; font-family: 'Fragment Mono', monospace; font-size: 12px; cursor: pointer;">{{ w.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display: flex; gap: 6px; align-items: center;">
+      <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: oklch(0.55 0.012 75); text-transform: uppercase; margin-right: 4px;">owner</div>
+      <sc-for list="{{ ownerChips }}" as="o" hint-placeholder-count="7">
+        <button onClick="{{ o.pick }}" style="padding: 7px 12px; border: 1px solid {{ o.border }}; border-radius: 99px; background: {{ o.bg }}; color: {{ o.color }}; font-size: 12px; cursor: pointer;">{{ o.name }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- Today view -->
+  <sc-if value="{{ todayView }}" hint-placeholder-val="{{ false }}">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 16px; margin-top: 20px; align-items: start;">
+      <sc-for list="{{ todaySections }}" as="ts" hint-placeholder-count="3">
+        <div style="border: 1px solid {{ ts.border }}; border-radius: 12px; background: oklch(0.185 0.01 70); padding: 18px 20px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px;">
+            <div style="font-size: 15px; font-weight: 600; color: {{ ts.color }};">{{ ts.title }}</div>
+            <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.6 0.015 75);">{{ ts.count }}</div>
+          </div>
+          <sc-if value="{{ ts.empty }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size: 13px; color: oklch(0.55 0.012 75);">{{ ts.emptyMsg }}</div>
+          </sc-if>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <sc-for list="{{ ts.rows }}" as="t" hint-placeholder-count="4">
+              <div onClick="{{ t.open }}" title="Open this week" style="display: flex; gap: 9px; align-items: flex-start; padding: 7px 8px; border-radius: 7px; cursor: pointer; opacity: {{ t.opacity }};" style-hover="background: oklch(0.155 0.008 70);">
+                <div onClick="{{ t.toggle }}" title="Mark done" style="width: 14px; height: 14px; border-radius: 5px; border: 1.5px solid {{ t.boxBorder }}; background: {{ t.boxBg }}; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; color: oklch(0.15 0.008 70); font-size: 10px; font-weight: 700;">{{ t.check }}</div>
+                <div style="min-width: 0;">
+                  <div style="font-size: 13px; line-height: 1.4; text-decoration: {{ t.deco }};">{{ t.title }}</div>
+                  <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.58 0.015 75); margin-top: 2px;">{{ t.meta }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- Full plan view -->
+  <sc-if value="{{ planView }}" hint-placeholder-val="{{ false }}">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 12px; margin-top: 20px; align-items: stretch;">
+      <sc-for list="{{ planWeeks }}" as="pw" hint-placeholder-count="9">
+        <div style="display: flex; flex-direction: column; border: 1px solid {{ pw.border }}; border-radius: 12px; background: oklch(0.185 0.01 70); overflow: hidden;">
+          <div onClick="{{ pw.open }}" title="Open this week" style="padding: 12px 14px; background: {{ pw.headBg }}; border-bottom: 1px solid oklch(0.24 0.01 70); cursor: pointer;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+              <div style="font-family: 'Fragment Mono', monospace; font-size: 12px; font-weight: 700; color: {{ pw.headColor }};">W{{ pw.n }} &middot; {{ pw.range }}</div>
+              <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.6 0.015 75);">{{ pw.count }}</div>
+            </div>
+            <div style="font-size: 11.5px; color: oklch(0.68 0.015 76); line-height: 1.4; margin-top: 4px;">{{ pw.theme }}</div>
+          </div>
+          <div onDragOver="{{ pw.dragOver }}" onDrop="{{ pw.drop }}" style="display: flex; flex-direction: column; gap: 2px; padding: 8px; flex: 1; min-height: 60px;">
+            <sc-for list="{{ pw.tasks }}" as="t" hint-placeholder-count="7">
+              <div style="border-radius: 6px; border: 1px solid {{ t.rowBorder }};" draggable="{{ true }}" onDragStart="{{ t.dragStart }}" onDragOver="{{ t.dragOver }}" onDrop="{{ t.drop }}">
+                <sc-if value="{{ t.notEditing }}" hint-placeholder-val="{{ true }}">
+                  <div onClick="{{ t.startEdit }}" title="Click to edit \u00b7 drag to move" style="display: flex; gap: 8px; align-items: flex-start; padding: 5px 6px; cursor: pointer; opacity: {{ t.opacity }};" style-hover="background: oklch(0.155 0.008 70);">
+                    <div onClick="{{ t.toggle }}" title="Mark done" style="width: 12px; height: 12px; border-radius: 4px; border: 1.5px solid {{ t.boxBorder }}; background: {{ t.boxBg }}; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; color: oklch(0.15 0.008 70); font-size: 9px; font-weight: 700;">{{ t.check }}</div>
+                    <div style="min-width: 0;">
+                      <div style="font-size: 12px; line-height: 1.35; text-decoration: {{ t.deco }};">{{ t.title }}</div>
+                      <div style="font-family: 'Fragment Mono', monospace; font-size: 9px; color: oklch(0.58 0.015 75); margin-top: 1px;">{{ t.meta }}</div>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ t.editing }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 6px; padding: 8px;">
+                    <input value="{{ fpT }}" onChange="{{ setFpT }}" placeholder="Task title" style="background: oklch(0.14 0.008 70); border: 1px solid oklch(0.3 0.02 85); border-radius: 5px; padding: 6px 8px; color: oklch(0.92 0.01 80); font-size: 12px; outline: none;">
+                    <div style="display: flex; gap: 5px;">
+                      <select value="{{ fpWk }}" onChange="{{ setFpWk }}" title="Move to week" style="flex: 1; min-width: 0; background: oklch(0.19 0.01 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 5px; padding: 5px 6px; color: oklch(0.78 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 10px; cursor: pointer; outline: none;">
+                        <sc-for list="{{ fpWkOpts }}" as="op" hint-placeholder-count="9"><option value="{{ op }}">{{ op }}</option></sc-for>
+                      </select>
+                      <select value="{{ fpDue }}" onChange="{{ setFpDue }}" title="Due date" style="flex: 1; min-width: 0; background: oklch(0.19 0.01 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 5px; padding: 5px 6px; color: oklch(0.78 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 10px; cursor: pointer; outline: none;">
+                        <sc-for list="{{ fpDueOpts }}" as="dp" hint-placeholder-count="6"><option value="{{ dp }}">{{ dp }}</option></sc-for>
+                      </select>
+                    </div>
+                    <div style="display: flex; gap: 6px; justify-content: flex-end;">
+                      <button onClick="{{ fpCancel }}" style="padding: 5px 10px; border: 1px solid oklch(0.28 0.012 70); border-radius: 5px; background: oklch(0.18 0.01 70); color: oklch(0.7 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 10px; cursor: pointer;">cancel</button>
+                      <button onClick="{{ fpSave }}" style="padding: 5px 12px; border: 1px solid oklch(0.4 0.06 85); border-radius: 5px; background: oklch(0.24 0.025 85); color: oklch(0.82 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 10px; cursor: pointer;">save</button>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+            <sc-if value="{{ pw.notAdding }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ pw.startAdd }}" style="margin-top: 2px; padding: 6px; border: 1px dashed oklch(0.28 0.015 75); border-radius: 6px; background: none; color: oklch(0.6 0.015 75); font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.06em; cursor: pointer; text-transform: uppercase;" style-hover="color: oklch(0.8 0.12 85); border-color: oklch(0.4 0.06 85);">+ task</button>
+            </sc-if>
+            <sc-if value="{{ pw.adding }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; gap: 5px; margin-top: 2px;">
+                <input ref="{{ fpNew }}" placeholder="New task" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.3 0.02 85); border-radius: 5px; padding: 6px 8px; color: oklch(0.92 0.01 80); font-size: 12px; outline: none;">
+                <button onClick="{{ pw.confirmAdd }}" style="padding: 6px 10px; border: 1px solid oklch(0.4 0.06 85); border-radius: 5px; background: oklch(0.24 0.025 85); color: oklch(0.82 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 10px; cursor: pointer;">add</button>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- Main grid -->
+  <sc-if value="{{ weekView }}" hint-placeholder-val="{{ true }}">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 20px; margin-top: 20px; align-items: start;">
+
+    <!-- Week priorities -->
+    <div style="border: 1px solid oklch(0.28 0.012 70); border-radius: 12px; background: oklch(0.185 0.01 70); padding: 24px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 6px;">
+        <div style="font-size: 17px; font-weight: 600;">{{ weekTitle }}</div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.75 0.12 85);">{{ weekRange }}</div>
+      </div>
+      <div style="font-size: 13px; color: oklch(0.62 0.015 75); margin-bottom: 14px;">{{ weekTheme }}</div>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="flex: 1; height: 5px; border-radius: 99px; background: oklch(0.24 0.01 70); overflow: hidden;">
+          <div style="height: 100%; width: {{ progressPct }}; background: oklch(0.72 0.11 155); border-radius: 99px; transition: width 0.3s;"></div>
+        </div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.62 0.015 75);">{{ progressLabel }}</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="5">
+          <div style="border-radius: 9px; background: oklch(0.155 0.008 70); border: 1px solid {{ it.rowBorder }}; opacity: {{ it.opacity }};">
+            <sc-if value="{{ it.editing }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 7px; padding: 14px 16px;">
+                <input value="{{ editT }}" onChange="{{ setEditT }}" placeholder="Task title" style="background: oklch(0.14 0.008 70); border: 1px solid oklch(0.3 0.02 85); border-radius: 6px; padding: 8px 10px; color: oklch(0.92 0.01 80); font-size: 14px; font-weight: 500; outline: none;">
+                <input value="{{ editD }}" onChange="{{ setEditD }}" placeholder="Short description" style="background: oklch(0.14 0.008 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.85 0.01 78); font-size: 13px; outline: none;">
+                <textarea value="{{ editX }}" onChange="{{ setEditX }}" rows="{{ editXRows }}" placeholder="Full description — one bullet per line" style="background: oklch(0.14 0.008 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.85 0.01 78); font-size: 13px; line-height: 1.5; outline: none; resize: vertical; font-family: inherit; min-height: 60px;"></textarea>
+                <div style="display: flex; gap: 7px;">
+                  <input value="{{ editW }}" onChange="{{ setEditW }}" placeholder="Workstream" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.85 0.01 78); font-size: 13px; outline: none;">
+                  <input value="{{ editO }}" onChange="{{ setEditO }}" placeholder="Owner" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.85 0.01 78); font-size: 13px; outline: none;">
+                  <input value="{{ editDue }}" onChange="{{ setEditDue }}" placeholder="Due (e.g. Sep 4)" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.3 0.02 85); border-radius: 6px; padding: 8px 10px; color: oklch(0.85 0.01 78); font-size: 13px; outline: none;">
+                </div>
+                <div style="display: flex; gap: 8px; justify-content: flex-end; align-items: center;">
+                  <button onClick="{{ it.remove }}" style="margin-right: auto; border: none; background: none; color: oklch(0.6 0.08 30); font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.08em; cursor: pointer; text-transform: uppercase; padding: 4px 0;" style-hover="color: oklch(0.75 0.12 30);">remove task</button>
+                  <button onClick="{{ cancelEdit }}" style="padding: 7px 14px; border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; background: oklch(0.18 0.01 70); color: oklch(0.7 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">cancel</button>
+                  <button onClick="{{ saveEdit }}" style="padding: 7px 14px; border: 1px solid oklch(0.4 0.06 85); border-radius: 6px; background: oklch(0.24 0.025 85); color: oklch(0.82 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">save</button>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ it.notEditing }}" hint-placeholder-val="{{ true }}">
+              <div onClick="{{ it.expand }}" draggable="{{ true }}" onDragStart="{{ it.dragStart }}" onDragOver="{{ it.dragOver }}" onDrop="{{ it.drop }}" title="Drag to reorder or move" style="display: flex; gap: 14px; align-items: flex-start; padding: 13px 16px; cursor: pointer;">
+                <div onClick="{{ it.toggle }}" title="Mark done" style="width: 18px; height: 18px; border-radius: 6px; border: 1.5px solid {{ it.boxBorder }}; background: {{ it.boxBg }}; margin-top: 1px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: oklch(0.15 0.008 70); font-size: 13px; font-weight: 700;">{{ it.check }}</div>
+                <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0;">
+                  <div style="font-size: 15px; font-weight: 500; text-decoration: {{ it.deco }};">{{ it.title }}</div>
+                  <sc-if value="{{ it.hasDesc }}" hint-placeholder-val="{{ true }}">
+                    <div style="font-size: 13px; color: oklch(0.66 0.015 76); line-height: 1.45;">{{ it.desc }}</div>
+                  </sc-if>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.62 0.015 75);">{{ it.ws }}</span>
+                    <select value="{{ it.owner }}" onChange="{{ it.setOwner }}" onClick="{{ stopProp }}" title="Change owner" style="background: oklch(0.19 0.01 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; padding: 3px 6px; color: oklch(0.75 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer; outline: none;">
+                      <sc-for list="{{ it.ownerOpts }}" as="op" hint-placeholder-count="7"><option value="{{ op }}">{{ op }}</option></sc-for>
+                    </select>
+                    <select value="{{ it.due }}" onChange="{{ it.setDue }}" onClick="{{ stopProp }}" title="Change due date" style="background: oklch(0.19 0.01 70); border: 1px solid {{ it.dueBorder }}; border-radius: 6px; padding: 3px 6px; color: {{ it.dueColor }}; font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer; outline: none;">
+                      <sc-for list="{{ it.dueOpts }}" as="dp" hint-placeholder-count="6"><option value="{{ dp }}">{{ dp }}</option></sc-for>
+                    </select>
+                  </div>
+                  <sc-if value="{{ it.expanded }}" hint-placeholder-val="{{ false }}">
+                    <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px; padding-top: 10px; border-top: 1px solid oklch(0.24 0.01 70);">
+                      <sc-for list="{{ it.detail }}" as="p" hint-placeholder-count="2">
+                        <div style="display: flex; gap: 9px; align-items: baseline;">
+                          <div style="width: 4px; height: 4px; border-radius: 50%; background: oklch(0.75 0.12 85); flex-shrink: 0; position: relative; top: -3px;"></div>
+                          <div style="font-size: 13px; color: oklch(0.75 0.015 78); line-height: 1.5;">{{ p }}</div>
+                        </div>
+                      </sc-for>
+                      <sc-if value="{{ it.noDetail }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size: 13px; color: oklch(0.55 0.012 75); line-height: 1.5; font-style: italic;">No full description yet.</div>
+                      </sc-if>
+                      <button onClick="{{ it.startEdit }}" style="align-self: flex-start; margin-top: 4px; border: none; background: none; padding: 2px 0; color: oklch(0.6 0.05 85); font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.08em; cursor: pointer; text-transform: uppercase;" style-hover="color: oklch(0.8 0.12 85);">edit task</button>
+                    </div>
+                  </sc-if>
+                </div>
+                <div style="font-family: 'Fragment Mono', monospace; font-size: 12px; color: oklch(0.55 0.012 75); margin-top: 2px;">{{ it.chev }}</div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="display: flex; flex-direction: column; gap: 7px; padding: 12px 14px; border-radius: 9px; border: 1px dashed oklch(0.28 0.015 75);">
+          <input ref="{{ ntT }}" placeholder="New task for this week" style="background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 80); font-size: 13px; outline: none;">
+          <div style="display: flex; gap: 7px;">
+            <input ref="{{ ntW }}" placeholder="Workstream" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 80); font-size: 13px; outline: none;">
+            <input ref="{{ ntO }}" placeholder="Owner" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 80); font-size: 13px; outline: none;">
+            <input ref="{{ ntDue }}" placeholder="Due" style="width: 74px; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 80); font-size: 13px; outline: none;">
+            <button onClick="{{ addTask }}" style="padding: 8px 14px; border: 1px solid oklch(0.4 0.06 85); border-radius: 6px; background: oklch(0.22 0.02 85); color: oklch(0.8 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">+ add task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blocked -->
+    <div style="border: 1px solid oklch(0.32 0.05 30); border-radius: 12px; background: oklch(0.185 0.012 40); padding: 24px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 18px;">
+        <div style="font-size: 17px; font-weight: 600; color: oklch(0.78 0.1 35);">Blocked</div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.62 0.015 75);">{{ blockerCount }}</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <sc-for list="{{ blockers }}" as="b" hint-placeholder-count="2">
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 9px; background: oklch(0.155 0.01 40); border: 1px solid oklch(0.28 0.03 30);">
+            <div style="display: flex; justify-content: space-between; gap: 10px; align-items: flex-start;">
+              <div style="font-size: 15px; font-weight: 500; flex: 1;">{{ b.title }}</div>
+              <button onClick="{{ b.clear }}" title="Cleared / no longer blocking" style="border: none; background: none; color: oklch(0.6 0.05 35); font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.08em; cursor: pointer; padding: 2px 0; text-transform: uppercase;" style-hover="color: oklch(0.8 0.1 35);">clear</button>
+            </div>
+            <div style="font-size: 13px; color: oklch(0.68 0.02 60); line-height: 1.45;">{{ b.needs }}</div>
+            <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.68 0.1 35);">{{ b.meta }}</div>
+          </div>
+        </sc-for>
+        <div style="display: flex; flex-direction: column; gap: 7px; padding: 12px 14px; border-radius: 9px; border: 1px dashed oklch(0.3 0.03 30);">
+          <input ref="{{ nbT }}" placeholder="What's blocked?" style="background: oklch(0.14 0.008 40); border: 1px solid oklch(0.26 0.02 30); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 60); font-size: 13px; outline: none;">
+          <input ref="{{ nbN }}" placeholder="What's needed to unblock it?" style="background: oklch(0.14 0.008 40); border: 1px solid oklch(0.26 0.02 30); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 60); font-size: 13px; outline: none;">
+          <div style="display: flex; gap: 7px;">
+            <input ref="{{ nbO }}" placeholder="Owner" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 40); border: 1px solid oklch(0.26 0.02 30); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 60); font-size: 13px; outline: none;">
+            <button onClick="{{ addBlocker }}" style="padding: 8px 14px; border: 1px solid oklch(0.34 0.04 30); border-radius: 6px; background: oklch(0.22 0.02 35); color: oklch(0.8 0.1 35); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">+ add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decisions -->
+    <div style="border: 1px solid oklch(0.3 0.04 265); border-radius: 12px; background: oklch(0.185 0.012 265); padding: 24px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 18px;">
+        <div style="font-size: 17px; font-weight: 600; color: oklch(0.76 0.08 265);">Decisions needed</div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.62 0.015 75);">{{ decisionCount }}</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <sc-for list="{{ decisions }}" as="d" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 7px; padding: 14px 16px; border-radius: 9px; background: oklch(0.155 0.01 265); border: 1px solid oklch(0.26 0.03 265);">
+            <div style="font-size: 15px; font-weight: 500;">{{ d.title }}</div>
+            <sc-if value="{{ d.hasDesc }}" hint-placeholder-val="{{ false }}">
+              <div onClick="{{ d.toggleExpand }}" style="font-size: 13px; color: oklch(0.7 0.02 265); line-height: 1.5; cursor: pointer;" title="Click to expand">{{ d.desc }} <span style="color: oklch(0.6 0.06 265); font-family: 'Fragment Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;">{{ d.moreLabel }}</span></div>
+            </sc-if>
+            <div style="display: flex; justify-content: space-between; gap: 10px; align-items: center;">
+              <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.7 0.07 265);">{{ d.meta }}</div>
+              <sc-if value="{{ d.idle }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ d.startResolve }}" style="border: none; background: none; color: oklch(0.65 0.06 265); font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.08em; cursor: pointer; padding: 2px 0; text-transform: uppercase;" style-hover="color: oklch(0.82 0.08 265);">resolve</button>
+              </sc-if>
+            </div>
+            <sc-if value="{{ d.resolving }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; gap: 7px; margin-top: 2px;">
+                <input ref="{{ resRef }}" placeholder="What did you decide?" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 265); border: 1px solid oklch(0.3 0.04 265); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 265); font-size: 13px; outline: none;">
+                <button onClick="{{ d.confirmResolve }}" style="padding: 8px 12px; border: 1px solid oklch(0.36 0.05 265); border-radius: 6px; background: oklch(0.24 0.03 265); color: oklch(0.8 0.08 265); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">log it</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="display: flex; flex-direction: column; gap: 7px; padding: 12px 14px; border-radius: 9px; border: 1px dashed oklch(0.28 0.03 265);">
+          <input ref="{{ ndT }}" placeholder="What needs deciding?" style="background: oklch(0.14 0.008 265); border: 1px solid oklch(0.26 0.03 265); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 265); font-size: 13px; outline: none;">
+          <input ref="{{ ndD }}" placeholder="Context / description (optional)" style="background: oklch(0.14 0.008 265); border: 1px solid oklch(0.26 0.03 265); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 265); font-size: 13px; outline: none;">
+          <div style="display: flex; gap: 7px;">
+            <input ref="{{ ndO }}" placeholder="Who decides" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 265); border: 1px solid oklch(0.26 0.03 265); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 265); font-size: 13px; outline: none;">
+            <input ref="{{ ndBy }}" placeholder="By when" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 265); border: 1px solid oklch(0.26 0.03 265); border-radius: 6px; padding: 8px 10px; color: oklch(0.9 0.01 265); font-size: 13px; outline: none;">
+            <button onClick="{{ addDecision }}" style="padding: 8px 14px; border: 1px solid oklch(0.36 0.05 265); border-radius: 6px; background: oklch(0.24 0.03 265); color: oklch(0.8 0.08 265); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">+ add</button>
+          </div>
+        </div>
+        <sc-if value="{{ hasLog }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 4px;">
+            <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: oklch(0.55 0.012 75); text-transform: uppercase; margin-bottom: 8px;">decision record</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <sc-for list="{{ log }}" as="l" hint-placeholder-count="1">
+                <div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 7px; background: oklch(0.15 0.008 265); border: 1px solid oklch(0.22 0.02 265);">
+                  <div style="font-size: 13px; color: oklch(0.75 0.02 265);">{{ l.title }}</div>
+                  <div style="font-size: 13px; font-weight: 600; color: oklch(0.85 0.05 155);">&rarr; {{ l.outcome }}</div>
+                  <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.55 0.012 75);">{{ l.date }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- Timeline -->
+  <div style="border: 1px solid oklch(0.28 0.012 70); border-radius: 12px; background: oklch(0.185 0.01 70); padding: 24px; margin-top: 20px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 20px;">
+      <div style="font-size: 17px; font-weight: 600;">Sprint timeline</div>
+      <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.62 0.015 75);">Sep 14 &rarr; Oct 28</div>
+    </div>
+    <div style="position: relative;">
+      <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;">
+        <div style="grid-column: 1 / 3; border-radius: 7px; background: oklch(0.25 0.025 85); border: 1px solid oklch(0.36 0.05 85); padding: 10px 14px;">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: oklch(0.8 0.12 85); text-transform: uppercase;">W1&ndash;2 &middot; Brand &amp; wireframes</div>
+          <div style="font-size: 13px; color: oklch(0.78 0.015 80); margin-top: 3px;">Our own branding exercise, Pineapple kickoff, practitioners weigh in &rarr; wireframe locked Sep 25</div>
+        </div>
+        <div style="grid-column: 3 / 5; border-radius: 7px; background: oklch(0.22 0.015 155); border: 1px solid oklch(0.3 0.03 155); padding: 10px 14px;">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: oklch(0.72 0.11 155); text-transform: uppercase;">W3&ndash;4 &middot; Polish &amp; code</div>
+          <div style="font-size: 13px; color: oklch(0.78 0.015 80); margin-top: 3px;">Ryan first pass reviewed, Jenni finalizes UI/UX, Oleg wires Second Brain connectors, Map of Me prototype</div>
+        </div>
+        <div style="grid-column: 5 / 7; border-radius: 7px; background: oklch(0.22 0.015 155); border: 1px solid oklch(0.3 0.03 155); padding: 10px 14px;">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: oklch(0.72 0.11 155); text-transform: uppercase;">W5&ndash;6 &middot; Ready to raise</div>
+          <div style="font-size: 13px; color: oklch(0.78 0.015 80); margin-top: 3px;">App functional end to end, deck done, docs + name + entity settled, friendly pitches</div>
+        </div>
+        <div style="grid-column: 7 / 8; border-radius: 7px; background: oklch(0.25 0.025 85); border: 1px solid oklch(0.36 0.05 85); padding: 10px 14px;">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: oklch(0.8 0.12 85); text-transform: uppercase;">W7 &middot; Hands on &amp; raise</div>
+          <div style="font-size: 13px; color: oklch(0.78 0.015 80); margin-top: 3px;">Core community uses the app, first pitch, raise opens &rarr; Oct 28</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 14px;">
+        <div style="grid-column: 2; display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.75 0.12 85);"></div>
+          <div style="font-size: 12px; color: oklch(0.7 0.015 78); line-height: 1.35;">Sep 25 &middot; wireframe locked</div>
+        </div>
+        <div style="grid-column: 3; display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.72 0.11 155);"></div>
+          <div style="font-size: 12px; color: oklch(0.7 0.015 78); line-height: 1.35;">Oct 2 &middot; Map of Me &middot; coding starts</div>
+        </div>
+        <div style="grid-column: 4; display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.72 0.11 155);"></div>
+          <div style="font-size: 12px; color: oklch(0.7 0.015 78); line-height: 1.35;">Oct 9 &middot; investor list prioritized</div>
+        </div>
+        <div style="grid-column: 5; display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.75 0.12 85);"></div>
+          <div style="font-size: 12px; color: oklch(0.7 0.015 78); line-height: 1.35;">Oct 16 &middot; UI/UX production ready</div>
+        </div>
+        <div style="grid-column: 7; display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.8 0.12 85);"></div>
+          <div style="font-size: 12px; color: oklch(0.7 0.015 78); line-height: 1.35;">Oct 28 &middot; first pitch</div>
+        </div>
+      </div>
+      <sc-if value="{{ showTodayMarker }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; top: -8px; bottom: 4px; left: {{ todayPct }}; width: 1px; background: oklch(0.85 0.02 80); opacity: 0.7;">
+          <div style="position: absolute; bottom: -16px; left: -18px; font-family: 'Fragment Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: oklch(0.85 0.02 80);">TODAY</div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- Workstreams -->
+  <div style="border: 1px solid oklch(0.28 0.012 70); border-radius: 12px; background: oklch(0.185 0.01 70); padding: 24px; margin-top: 20px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px;">
+      <div style="font-size: 17px; font-weight: 600;">Workstreams</div>
+      <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.62 0.015 75);">tap a card to see its tasks &middot; click the dot to set status &middot; yellow twice in a row = intervene &middot; red = discuss now</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">
+      <sc-for list="{{ wsCards }}" as="w" hint-placeholder-count="14">
+        <div onClick="{{ w.openTasks }}" title="See all tasks in this workstream" style="display: flex; flex-direction: column; gap: 5px; padding: 12px 14px; border-radius: 8px; background: oklch(0.155 0.008 70); border: 1px solid oklch(0.24 0.01 70); cursor: pointer;" style-hover="border-color: oklch(0.34 0.02 80);">
+          <div style="display: flex; align-items: center; gap: 7px;"><span onClick="{{ w.cycle }}" title="Click to set status" style="width: 13px; height: 13px; border-radius: 50%; background: {{ w.color }}; flex-shrink: 0; border: 2px solid oklch(0.24 0.01 70);"></span><span style="font-size: 13px; font-weight: 600;">{{ w.name }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 6px;"><span style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.6 0.015 75);">{{ w.owner }}</span><span style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.55 0.012 75);">{{ w.count }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ wsTasksOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top: 14px; border: 1px solid oklch(0.32 0.02 80); border-radius: 10px; background: oklch(0.155 0.008 70); padding: 18px 20px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px;">
+          <div style="font-size: 15px; font-weight: 600;">{{ wsTasksTitle }}</div>
+          <button onClick="{{ closeWsTasks }}" style="border: none; background: none; color: oklch(0.6 0.015 75); font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="color: oklch(0.9 0.01 80);">close &times;</button>
+        </div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.55 0.012 75); margin-bottom: 10px;">in due-date order &middot; undated tasks follow, in week order</div>
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          <sc-for list="{{ wsTaskRows }}" as="t" hint-placeholder-count="6">
+            <div onClick="{{ t.open }}" title="Open this week" style="display: flex; gap: 10px; align-items: flex-start; padding: 7px 8px; border-radius: 7px; cursor: pointer; opacity: {{ t.opacity }};" style-hover="background: oklch(0.17 0.009 70);">
+              <div onClick="{{ t.toggle }}" title="Mark done" style="width: 14px; height: 14px; border-radius: 5px; border: 1.5px solid {{ t.boxBorder }}; background: {{ t.boxBg }}; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; color: oklch(0.15 0.008 70); font-size: 10px; font-weight: 700;">{{ t.check }}</div>
+              <div style="width: 74px; flex-shrink: 0; font-family: 'Fragment Mono', monospace; font-size: 11px; color: {{ t.dueColor }}; margin-top: 2px;">{{ t.due }}</div>
+              <div style="min-width: 0;">
+                <div style="font-size: 13px; line-height: 1.4; text-decoration: {{ t.deco }};">{{ t.title }}</div>
+                <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.58 0.015 75); margin-top: 2px;">{{ t.meta }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <div style="display: flex; gap: 18px; margin-top: 14px; font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: oklch(0.55 0.012 75); text-transform: uppercase;">
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: oklch(0.72 0.11 155); display: inline-block;"></span>green &middot; underway</div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: oklch(0.75 0.12 85); display: inline-block;"></span>yellow &middot; needs attention</div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: oklch(0.68 0.14 30); display: inline-block;"></span>red &middot; off track</div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: oklch(0.5 0.01 75); display: inline-block;"></span>grey &middot; not started</div>
+    </div>
+  </div>
+
+  <!-- Budget + investors -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 20px; margin-top: 20px; align-items: start;">
+    <div style="border: 1px solid oklch(0.28 0.012 70); border-radius: 12px; background: oklch(0.185 0.01 70); padding: 24px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px;">
+        <div style="font-size: 17px; font-weight: 600;">Budget</div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: {{ bgRemainColor }};">{{ bgRemainLabel }}</div>
+      </div>
+      <div style="display: flex; gap: 10px; margin-bottom: 14px;">
+        <div style="flex: 1; padding: 10px 12px; border-radius: 8px; background: oklch(0.155 0.008 70); border: 1px solid oklch(0.24 0.01 70);">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 16px;">{{ bgCommitted }}</div>
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: oklch(0.58 0.015 75); text-transform: uppercase; margin-top: 2px;">committed</div>
+        </div>
+        <div style="flex: 1; padding: 10px 12px; border-radius: 8px; background: oklch(0.155 0.008 70); border: 1px solid oklch(0.24 0.01 70);">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 16px;">{{ bgPaid }}</div>
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: oklch(0.58 0.015 75); text-transform: uppercase; margin-top: 2px;">paid</div>
+        </div>
+        <div style="flex: 1; padding: 10px 12px; border-radius: 8px; background: oklch(0.155 0.008 70); border: 1px solid oklch(0.3 0.03 85);">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 16px; color: {{ bgRemainColor }};">{{ bgRemain }}</div>
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: oklch(0.58 0.015 75); text-transform: uppercase; margin-top: 2px;">remaining of $40K</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <sc-for list="{{ budgetRows }}" as="b" hint-placeholder-count="2">
+          <div style="display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 8px; background: oklch(0.155 0.008 70); border: 1px solid oklch(0.24 0.01 70);">
+            <div style="flex: 1; min-width: 0; font-size: 13px;">{{ b.name }}</div>
+            <input value="{{ b.amt }}" onChange="{{ b.setAmt }}" title="Amount ($)" style="width: 72px; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 5px 7px; color: oklch(0.9 0.01 80); font-family: 'Fragment Mono', monospace; font-size: 12px; text-align: right; outline: none;">
+            <select value="{{ b.status }}" onChange="{{ b.setStatus }}" style="background: oklch(0.19 0.01 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; padding: 5px 6px; color: {{ b.statusColor }}; font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer; outline: none;">
+              <sc-for list="{{ bgStatusOpts }}" as="op" hint-placeholder-count="3"><option value="{{ op }}">{{ op }}</option></sc-for>
+            </select>
+            <button onClick="{{ b.remove }}" title="Remove" style="border: none; background: none; color: oklch(0.5 0.012 75); font-size: 15px; cursor: pointer; padding: 0 2px; line-height: 1;" style-hover="color: oklch(0.75 0.12 30);">&times;</button>
+          </div>
+        </sc-for>
+        <div style="display: flex; gap: 7px; padding: 10px 12px; border-radius: 8px; border: 1px dashed oklch(0.28 0.015 75);">
+          <input ref="{{ bgN }}" placeholder="Line item (e.g. legal)" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 7px 9px; color: oklch(0.9 0.01 80); font-size: 13px; outline: none;">
+          <input ref="{{ bgA }}" placeholder="$" style="width: 72px; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 7px 9px; color: oklch(0.9 0.01 80); font-family: 'Fragment Mono', monospace; font-size: 12px; text-align: right; outline: none;">
+          <button onClick="{{ addBudget }}" style="padding: 7px 12px; border: 1px solid oklch(0.4 0.06 85); border-radius: 6px; background: oklch(0.22 0.02 85); color: oklch(0.8 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">+ add</button>
+        </div>
+      </div>
+    </div>
+    <div style="border: 1px solid oklch(0.28 0.012 70); border-radius: 12px; background: oklch(0.185 0.01 70); padding: 24px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px;">
+        <div style="font-size: 17px; font-weight: 600;">Investor pipeline</div>
+        <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.62 0.015 75);">{{ invCount }}</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <sc-for list="{{ invRows }}" as="v" hint-placeholder-count="3">
+          <div style="display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 8px; background: oklch(0.155 0.008 70); border: 1px solid oklch(0.24 0.01 70);">
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 13px; font-weight: 500;">{{ v.name }}</div>
+              <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; color: oklch(0.58 0.015 75); margin-top: 1px;">{{ v.path }}</div>
+            </div>
+            <select value="{{ v.status }}" onChange="{{ v.setStatus }}" style="background: oklch(0.19 0.01 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 6px; padding: 5px 6px; color: {{ v.statusColor }}; font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer; outline: none;">
+              <sc-for list="{{ invStatusOpts }}" as="op" hint-placeholder-count="5"><option value="{{ op }}">{{ op }}</option></sc-for>
+            </select>
+            <button onClick="{{ v.remove }}" title="Remove" style="border: none; background: none; color: oklch(0.5 0.012 75); font-size: 15px; cursor: pointer; padding: 0 2px; line-height: 1;" style-hover="color: oklch(0.75 0.12 30);">&times;</button>
+          </div>
+        </sc-for>
+        <div style="display: flex; gap: 7px; padding: 10px 12px; border-radius: 8px; border: 1px dashed oklch(0.28 0.015 75);">
+          <input ref="{{ ivN }}" placeholder="Investor name" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 7px 9px; color: oklch(0.9 0.01 80); font-size: 13px; outline: none;">
+          <input ref="{{ ivP }}" placeholder="Intro path (who warms them)" style="flex: 1; min-width: 0; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 6px; padding: 7px 9px; color: oklch(0.9 0.01 80); font-size: 13px; outline: none;">
+          <button onClick="{{ addInv }}" style="padding: 7px 12px; border: 1px solid oklch(0.4 0.06 85); border-radius: 6px; background: oklch(0.22 0.02 85); color: oklch(0.8 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">+ add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.5 0.012 75); text-align: center;">Build the smallest authentic version &middot; watch carefully &middot; learn quickly &middot; capture the evidence &middot; then raise</div>
+
+  <!-- Share modal -->
+  <sc-if value="{{ shareOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeShare }}" style="position: fixed; inset: 0; z-index: 70; background: oklch(0.1 0.005 70 / 0.7); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 24px;">
+      <div onClick="{{ stopProp }}" style="width: 560px; max-width: 100%; max-height: 85vh; overflow: auto; border: 1px solid oklch(0.32 0.02 80); border-radius: 14px; background: oklch(0.17 0.01 70); padding: 28px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <div style="font-size: 19px; font-weight: 600;">Share &amp; export</div>
+          <button onClick="{{ closeShare }}" style="border: none; background: none; color: oklch(0.6 0.015 75); font-size: 20px; cursor: pointer; line-height: 1;" style-hover="color: oklch(0.9 0.01 80);">&times;</button>
+        </div>
+        <div style="margin-top: 20px; padding: 16px; border: 1px solid oklch(0.26 0.012 70); border-radius: 10px; background: oklch(0.15 0.008 70);">
+          <div style="font-size: 15px; font-weight: 600;">Post weekly digest to Slack</div>
+          <div style="font-size: 13px; color: oklch(0.68 0.015 76); line-height: 1.5; margin-top: 4px;">Paste a Slack incoming-webhook URL once (Slack &rarr; Apps &rarr; Incoming Webhooks &rarr; pick a channel). It&rsquo;s saved in this browser. The digest covers this week: done, open, blockers, and decisions needed.</div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <input value="{{ slackUrl }}" onChange="{{ setSlackUrl }}" placeholder="https://hooks.slack.com/services/&hellip;" style="flex: 1; min-width: 0; background: oklch(0.13 0.008 70); border: 1px solid oklch(0.26 0.012 70); border-radius: 7px; padding: 9px 11px; color: oklch(0.9 0.01 80); font-family: 'Fragment Mono', monospace; font-size: 11px; outline: none;">
+            <button onClick="{{ postSlack }}" style="padding: 9px 16px; border: 1px solid oklch(0.4 0.06 85); border-radius: 7px; background: oklch(0.24 0.025 85); color: oklch(0.82 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer; white-space: nowrap;">Post digest</button>
+          </div>
+          <sc-if value="{{ slackMsgShown }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: {{ slackMsgColor }}; margin-top: 8px;">{{ slackMsg }}</div>
+          </sc-if>
+        </div>
+        <div style="margin-top: 12px; padding: 16px; border: 1px solid oklch(0.26 0.012 70); border-radius: 10px; background: oklch(0.15 0.008 70);">
+          <div style="font-size: 15px; font-weight: 600;">Export for Notion</div>
+          <div style="font-size: 13px; color: oklch(0.68 0.015 76); line-height: 1.5; margin-top: 4px;">Copies the full plan as Markdown &mdash; checkboxes, owners, due dates, blockers, decisions. In Notion, paste onto any page; to-dos become real checkboxes.</div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button onClick="{{ copyNotion }}" style="padding: 9px 16px; border: 1px solid oklch(0.4 0.06 85); border-radius: 7px; background: oklch(0.24 0.025 85); color: oklch(0.82 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">Copy full plan</button>
+            <button onClick="{{ copyDigest }}" style="padding: 9px 16px; border: 1px solid oklch(0.3 0.015 75); border-radius: 7px; background: oklch(0.19 0.01 70); color: oklch(0.75 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 11px; cursor: pointer;">Copy weekly digest</button>
+          </div>
+          <sc-if value="{{ copyMsgShown }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; color: oklch(0.65 0.14 145); margin-top: 8px;">{{ copyMsg }}</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Walkthrough bar -->
+  <sc-if value="{{ walkActive }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; justify-content: center; padding: 0 24px 24px; pointer-events: none;">
+      <div style="pointer-events: auto; width: 860px; max-width: 100%; border: 1px solid oklch(0.4 0.06 85); border-radius: 14px; background: oklch(0.16 0.01 70 / 0.97); backdrop-filter: blur(8px); box-shadow: 0 12px 40px oklch(0.08 0.005 70 / 0.6); padding: 20px 24px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.75 0.12 85); text-transform: uppercase;">Walkthrough &middot; {{ walkStepLabel }}</div>
+          <button onClick="{{ endWalk }}" style="border: none; background: none; color: oklch(0.6 0.015 75); font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; padding: 2px 0;" style-hover="color: oklch(0.9 0.01 80);">esc to exit &times;</button>
+        </div>
+        <div style="font-size: 20px; font-weight: 600; margin-top: 8px;">{{ walkTitle }}</div>
+        <div style="font-size: 14px; color: oklch(0.78 0.015 78); line-height: 1.55; margin-top: 6px;">{{ walkCaption }}</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 16px;">
+          <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+            <sc-for list="{{ walkDots }}" as="dt" hint-placeholder-count="12">
+              <div onClick="{{ dt.go }}" style="width: 22px; height: 4px; border-radius: 99px; background: {{ dt.bg }}; cursor: pointer;"></div>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button onClick="{{ walkPrev }}" style="padding: 9px 16px; border: 1px solid oklch(0.3 0.012 70); border-radius: 8px; background: oklch(0.2 0.01 70); color: oklch(0.75 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 12px; cursor: pointer;">&larr;</button>
+            <button onClick="{{ walkNext }}" style="padding: 9px 20px; border: 1px solid oklch(0.4 0.06 85); border-radius: 8px; background: oklch(0.24 0.025 85); color: oklch(0.82 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 12px; cursor: pointer;">{{ walkNextLabel }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Weekly review modal -->
+  <sc-if value="{{ reviewOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; background: oklch(0.1 0.005 70 / 0.75); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 40px;">
+      <div style="width: 640px; max-width: 100%; max-height: 85vh; overflow: auto; border: 1px solid oklch(0.32 0.02 80); border-radius: 14px; background: oklch(0.17 0.01 70); padding: 28px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px;">
+          <div style="font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: oklch(0.75 0.12 85); text-transform: uppercase;">Weekly review &middot; {{ reviewStep }}</div>
+          <button onClick="{{ closeReview }}" style="border: none; background: none; color: oklch(0.6 0.015 75); font-size: 20px; cursor: pointer; line-height: 1;" style-hover="color: oklch(0.9 0.01 80);">&times;</button>
+        </div>
+        <div style="font-size: 22px; font-weight: 600; margin-bottom: 14px;">{{ reviewTitle }}</div>
+        <div style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px;">
+          <sc-for list="{{ reviewPrompts }}" as="p" hint-placeholder-count="3">
+            <div style="display: flex; gap: 10px; align-items: baseline;">
+              <div style="width: 5px; height: 5px; border-radius: 50%; background: oklch(0.75 0.12 85); flex-shrink: 0; position: relative; top: -2px;"></div>
+              <div style="font-size: 14px; color: oklch(0.78 0.015 78); line-height: 1.5;">{{ p }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <textarea value="{{ reviewNote }}" onChange="{{ setReviewNote }}" placeholder="Notes for this section &mdash; saved automatically" rows="5" style="width: 100%; box-sizing: border-box; background: oklch(0.14 0.008 70); border: 1px solid oklch(0.28 0.012 70); border-radius: 8px; padding: 12px; color: oklch(0.9 0.01 80); font-size: 14px; line-height: 1.5; resize: vertical; outline: none;"></textarea>
+        <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 16px;">
+          <button onClick="{{ reviewPrev }}" style="padding: 10px 18px; border: 1px solid oklch(0.3 0.012 70); border-radius: 8px; background: oklch(0.2 0.01 70); color: oklch(0.75 0.015 78); font-family: 'Fragment Mono', monospace; font-size: 12px; cursor: pointer;">&larr; back</button>
+          <button onClick="{{ reviewNext }}" style="padding: 10px 18px; border: 1px solid oklch(0.4 0.06 85); border-radius: 8px; background: oklch(0.24 0.025 85); color: oklch(0.82 0.12 85); font-family: 'Fragment Mono', monospace; font-size: 12px; cursor: pointer;">{{ reviewNextLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;status&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;On track&quot;, &quot;options&quot;: [&quot;On track&quot;, &quot;At risk&quot;, &quot;Off track&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Sprint&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.KEY = 'kova-mission-control-v45g';
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(this.KEY) || '{}'); } catch (e) {}
+    this.state = Object.assign({
+      checked: null, ws: {}, owner: 'All', week: null, view: 'week',
+      blockers: null, decisions: null, log: [],
+      resolvingId: null, reviewOpen: false, reviewIdx: 0, notes: {}, expanded: {},
+      custom: {}, edits: {}, hidden: {}, editingKey: null, editT: '', editD: '', editW: '', editO: '', editDue: '', editX: '',
+      fpKey: null, fpT: '', fpDue: '', fpWk: 1, fpSrcWk: 1, addingWk: null,
+      budget: null, investors: null, order: {}, slackUrl: ''
+    }, saved);
+    Object.assign(this.state, { resolvingId: null, reviewOpen: false, expanded: {}, editingKey: null, walkIdx: null, fpKey: null, addingWk: null, shareOpen: false, slackMsg: '', copyMsg: '', wsOpen: null });
+    // seeded above
+    this.ntT = React.createRef(); this.ntW = React.createRef(); this.ntO = React.createRef(); this.ntDue = React.createRef();
+    this.nbT = React.createRef(); this.nbN = React.createRef(); this.nbO = React.createRef();
+    this.ndT = React.createRef(); this.ndO = React.createRef(); this.ndBy = React.createRef(); this.ndD = React.createRef();
+    this.resRef = React.createRef(); this.fpNew = React.createRef();
+    this.bgN = React.createRef(); this.bgA = React.createRef(); this.ivN = React.createRef(); this.ivP = React.createRef();
+    this.DEFAULT_BUDGET = [
+      { id: 'bg1', name: 'Brand partner (Pineapple)', amt: 10000, status: 'committed' },
+      { id: 'bg2', name: 'UI/UX partner (Jenni)', amt: 0, status: 'planned' }
+    ];
+    this.PLAN = [{"n":0,"range":"AUG 31–SEP 11 · DONE","s":"2026-08-31","theme":"Carried forward from the 60-day plan. Mark completed everything he set out to; foundations and Second Brain architecture are locked.","items":[{"t":"Finalize 45-day objectives and definitions of success","ws":"PRODUCT","o":"Ryan + Brian"},{"t":"Lock the MVP must-haves","ws":"PRODUCT","o":"Ryan + Brian"},{"t":"Finalize first-community candidate list; define Wave 0 / 1 / 2","ws":"COMMUNITY","o":"Ryan + Brian"},{"t":"Finalize investor archetypes; begin the ~20-person investor list","ws":"FUNDRAISE","o":"Ryan"},{"t":"Establish the six fundraising readiness gates","ws":"FUNDRAISE","o":"Ryan + Brian"},{"t":"Define explicit disproof criteria for the KOVA experience","ws":"PRODUCT","o":"Ryan + Brian"},{"t":"DECIDED: brand partner is Pineapple","ws":"BRAND","o":"Ryan + Brian"},{"t":"Baseline evaluation of the current KOVA system","ws":"MODEL","o":"Mark"},{"t":"Define the model evaluation framework","ws":"MODEL","o":"Mark"},{"t":"Technical definition of core AI behaviors","ws":"MODEL","o":"Mark"},{"t":"Establish memory / context architecture","ws":"MODEL","o":"Mark"},{"t":"Define the Map of Me data + synthesis model","ws":"MODEL","o":"Mark"},{"t":"Second Brain: finalize hard constraints","ws":"SECOND BRAIN","o":"Mark + Second Brain team"},{"t":"Second Brain: build the evaluation corpus + question set","ws":"SECOND BRAIN","o":"Mark + Second Brain team"},{"t":"Second Brain: choose the Month 1 architecture","ws":"SECOND BRAIN","o":"Mark + Second Brain team"},{"t":"Oleg: first experiments — custom bot built and run","ws":"SECOND BRAIN","o":"Oleg"}]},{"n":1,"range":"SEP 14–18","s":"2026-09-14","theme":"Branding exercise + UI/UX groundwork. Ryan and Brian only — no partners start this week.","items":[{"t":"Send branding prompts to Claude and ChatGPT to seed the exercise","ws":"BRAND","o":"Ryan + Brian","due":"Sep 16"},{"t":"Get Oleg the prioritized list of Second Brain use cases","ws":"SECOND BRAIN","o":"Mark","due":"Sep 16"},{"t":"Oleg: begin building out the use cases","ws":"SECOND BRAIN","o":"Oleg","due":"Sep 17"},{"t":"Ryan + Brian branding session — run our own branding exercise","ws":"BRAND","o":"Ryan + Brian","due":"Sep 18"},{"t":"Thursday: first meeting with the ML Go team on AWS funding","ws":"AWS","o":"Ryan + Brian","due":"Sep 17"},{"t":"Send Pineapple the overview of our branding work + the deck","ws":"BRAND","o":"Ryan","due":"Sep 18"},{"t":"Brian: onboarding experience — hand off current state to Mark","ws":"ONBOARDING","o":"Brian","due":"Sep 18"},{"t":"Ryan + Brian: wireframe the primary product","ws":"UI/UX","o":"Ryan + Brian"},{"t":"Schedule next week: Tarek UI/UX session, Lizzie, Jeff","ws":"UI/UX","o":"Ryan","due":"Sep 18"},{"t":"Confirm Pineapple kickoff for Mon Sep 21 or Tue Sep 22","ws":"BRAND","o":"Ryan","due":"Sep 18"},{"t":"Brian meets Chuck — explore a formal advisor role","ws":"ADVISORS","o":"Brian","due":"Sep 16"},{"t":"Finalize the corporate umbrella website","ws":"WEBSITE","o":"Ryan + Brian","due":"Sep 18"},{"t":"User testing process: get a first draft going","ws":"TESTING","o":"Ryan + Brian","due":"Sep 18"},{"t":"Review the budget for this plan","ws":"BUDGET","o":"Ryan + Brian","due":"Sep 18"},{"t":"Evaluate other accelerators — for the connections, not the process","ws":"FUNDRAISE","o":"Ryan + Brian"},{"t":"Set a standing weekly meeting with Tarek","ws":"PRIVACY","o":"Ryan","due":"Sep 18"}]},{"n":2,"range":"SEP 21–25","s":"2026-09-21","theme":"Partners start. Pineapple kickoff, Lizzie kicked off Monday, Ryan on the UI/UX first pass, wireframe finalized.","items":[{"t":"Pineapple brand kickoff call","ws":"BRAND","o":"Ryan + Brian + Pineapple","due":"Sep 22"},{"t":"Lizzie kickoff call — walked her through what we are building","ws":"ONBOARDING","o":"Ryan + Brian","due":"Sep 21"},{"t":"Jeff: early community — facilitators and early testers","ws":"COMMUNITY","o":"Ryan + Brian"},{"t":"Tarek session on UI/UX","ws":"UI/UX","o":"Ryan + Brian + Tarek"},{"t":"Updated cheat sheet: privacy, security and tech stack","ws":"PRIVACY","o":"Mark + Tarek","due":"Sep 25"},{"t":"Map of Me: detailed definition work begins","ws":"PRODUCT","o":"Ryan + Brian + Mark"},{"t":"Finalize the primary product wireframe, incl. onboarding prototype","ws":"UI/UX","o":"Ryan + Brian","due":"Sep 25"},{"t":"One-page MVP definition","ws":"PRODUCT","o":"Ryan + Brian + Tarek","due":"Sep 25"},{"t":"Get the corporate umbrella entity reinstated","ws":"LEGAL","o":"Sarah","due":"Sep 25"},{"t":"Engineering continues against the emerging UX architecture","ws":"PRODUCT","o":"Mark"},{"t":"Advisor list: who we want and what role each plays","ws":"ADVISORS","o":"Ryan + Brian","due":"Sep 25"},{"t":"Decide whether we ask advisors to put money in","ws":"ADVISORS","o":"Ryan + Brian","due":"Sep 25"},{"t":"Content creator list: the vision-board partners, and who to approach first","ws":"PARTNERS","o":"Ryan + Brian"},{"t":"Super node list: facilitators running retreats and workshops","ws":"PARTNERS","o":"Ryan + Brian"},{"t":"List the AI agents we might need","ws":"PRODUCT","o":"Mark + Oleg"},{"t":"Jack builds the AWS funding deck and submits the request","ws":"AWS","o":"Ryan","due":"Sep 25"},{"t":"User testing process: finalize v1 — a living document","ws":"TESTING","o":"Ryan + Brian","due":"Sep 25"},{"t":"Practitioner list beyond Lizzie and Jeff — seats and perspectives","ws":"PRACTITIONERS","o":"Ryan + Brian"},{"t":"Socials: decide which platforms, what the presence looks like, get them up","ws":"SOCIAL","o":"Ryan + Brian"},{"t":"Schedule and run the go-to-market strategy session","ws":"GTM","o":"Ryan + Brian"},{"t":"Start the developer search — known candidate or lemon.io","ws":"HIRING","o":"Ryan"},{"t":"Tarek + Mark: build out the privacy and security architecture","ws":"PRIVACY","o":"Mark + Tarek"},{"t":"Schedule the demo and feedback session with Ryan Foust for the week of Sep 28","ws":"PRIVACY","o":"Ryan","due":"Sep 25"},{"t":"Send Lizzie the Onboarding PDF deck","ws":"ONBOARDING","o":"Ryan + Brian","due":"Sep 24"},{"t":"Set a meeting with Jeff — review where onboarding stands, walk him through the onboarding experience PDF","ws":"ONBOARDING","o":"Ryan","due":"Sep 25"},{"t":"Ryan: UI/UX first pass","ws":"UI/UX","o":"Ryan","due":"Sep 25"}]},{"n":3,"range":"SEP 28–OCT 2","s":"2026-09-28","theme":"UI/UX first pass reviewed by Tarek, Brian, then Mark. Jenni onboards to help finalize. Lizzie starts onboarding work. Oleg wires the bot to our tools.","items":[{"t":"Jenni onboards — starts assisting with finalizing UI/UX","ws":"UI/UX","o":"Jenni + Ryan","due":"Sep 30"},{"t":"Present UI/UX first pass to Tarek + Brian — collect feedback","ws":"UI/UX","o":"Ryan","due":"Sep 28"},{"t":"Early-community invitation: design and finalize — one-week project","ws":"COMMUNITY","o":"Brian","due":"Oct 2"},{"t":"Map of Me prototype: flow and what we serve up","ws":"PRODUCT","o":"Ryan + Brian + Mark","due":"Oct 2"},{"t":"Decide and engage the fundraising attorney","ws":"LEGAL","o":"Ryan","due":"Oct 2"},{"t":"Lizzie: onboarding work underway","ws":"ONBOARDING","o":"Lizzie"},{"t":"Capture the facilitation pattern from Lizzie's session into onboarding","ws":"ONBOARDING","o":"Brian"},{"t":"Pineapple: positioning, narrative, naming territories","ws":"BRAND","o":"Pineapple"},{"t":"Oleg: design doc — foundational knowledge layer for the bot","ws":"SECOND BRAIN","o":"Oleg","due":"Oct 2"},{"t":"Developer: interviews and selection","ws":"HIRING","o":"Ryan","due":"Oct 2"},{"t":"AWS decision expected back","ws":"AWS","o":"Ryan"},{"t":"Demo to Ryan Foust and his co-founder — product plus privacy/security feedback","ws":"PRIVACY","o":"Ryan + Brian + Mark + Tarek"},{"t":"Present UI/UX first pass to Mark","ws":"UI/UX","o":"Ryan","due":"Sep 29"},{"t":"Oleg: hook the bot up to Granola, Notion, Claude, Gmail, Google Calendar and other platforms","ws":"SECOND BRAIN","o":"Oleg","due":"Sep 30"},{"t":"Oleg: meeting planner agent — easy","ws":"SECOND BRAIN","o":"Oleg","due":"Oct 2"}]},{"n":4,"range":"OCT 5–9","s":"2026-10-05","theme":"Jenni and Ryan finalize UI/UX, week two. Oleg starts the medium Second Brain use cases. Fundraise scaffolding starts in parallel.","items":[{"t":"Jenni + Ryan: UI/UX finalization, week two of two","ws":"UI/UX","o":"Jenni + Ryan"},{"t":"Fundraising checklist + data room skeleton","ws":"FUNDRAISE","o":"Ryan","due":"Oct 9"},{"t":"Investor list prioritized — who we approach and in what order","ws":"INVESTORS","o":"Ryan","due":"Oct 9"},{"t":"Jenni: core MVP flows resolved and handed to build","ws":"UI/UX","o":"Jenni"},{"t":"Privacy / security review","ws":"PRIVACY","o":"Tarek"},{"t":"Pineapple: core story and naming shortlist","ws":"BRAND","o":"Pineapple"},{"t":"Model: improvement from surfaced failures","ws":"MODEL","o":"Mark"},{"t":"Developer in place, onboarded, ready for handoff","ws":"HIRING","o":"Ryan","due":"Oct 9"},{"t":"AWS build kicks off — two to three month engagement","ws":"AWS","o":"Ryan + Mark"},{"t":"Marketing website: simple, but nailed down","ws":"WEBSITE","o":"Ryan + Brian"},{"t":"Lizzie walks Brian through the onboarding experience she created","ws":"ONBOARDING","o":"Brian + Lizzie","due":"Oct 9"},{"t":"Oleg: medium use cases — alignment/philosophy, on-track, meeting synthesis, open-thread research, Linear follow-up","ws":"SECOND BRAIN","o":"Oleg"}]},{"n":5,"range":"OCT 12–16","s":"2026-10-12","theme":"UI/UX finalized and production ready. Ryan starts the Claude Code build from the finished designs. Map of Me is the last thing designed.","items":[{"t":"UI/UX production ready","ws":"UI/UX","o":"Jenni + Ryan","due":"Oct 16"},{"t":"Map of Me: high-fidelity designs","ws":"UI/UX","o":"Jenni","due":"Oct 16"},{"t":"Ryan + Claude Code: initial build starts as the final designs land","ws":"BUILD","o":"Ryan","due":"Oct 16"},{"t":"Deck done — Pineapple’s four weeks land here","ws":"DECK","o":"Ryan + Brian","due":"Oct 16"},{"t":"Pineapple: name or finalists, identity direction","ws":"BRAND","o":"Pineapple"},{"t":"Data room populated","ws":"FUNDRAISE","o":"Ryan"},{"t":"Hand off the Claude Code build to the developer","ws":"HIRING","o":"Ryan","due":"Oct 16"},{"t":"Use of funds model for the raise — lives in the data room","ws":"BUDGET","o":"Ryan + Brian","due":"Oct 16"}]},{"n":6,"range":"OCT 19–23","s":"2026-10-19","theme":"Initial build lands. Oleg starts his audit. Everything else in place before the raise opens.","items":[{"t":"Ryan + Claude Code: initial build complete","ws":"BUILD","o":"Ryan","due":"Oct 23"},{"t":"Fundraising docs solid","ws":"LEGAL","o":"Ryan","due":"Oct 23"},{"t":"Company name settled and entity set up","ws":"LEGAL","o":"Ryan + Brian","due":"Oct 23"},{"t":"Data room set up and reviewed","ws":"FUNDRAISE","o":"Ryan","due":"Oct 23"},{"t":"Marketing website live","ws":"WEBSITE","o":"Ryan + Brian","due":"Oct 23"},{"t":"Socials live with an initial presence, LinkedIn included","ws":"SOCIAL","o":"Ryan + Brian","due":"Oct 23"},{"t":"Friendly pitches #1–3","ws":"FUNDRAISE","o":"Ryan + Brian"},{"t":"Story test with trusted outsiders: “What is KOVA?”","ws":"FUNDRAISE","o":"Ryan + Brian"},{"t":"Oleg: audit the build — fix, improve, add what is missing (two weeks)","ws":"BUILD","o":"Oleg","due":"Nov 6"}]},{"n":7,"range":"OCT 26–30","s":"2026-10-26","theme":"Open the raise. Day 45 is Wednesday Oct 28. Oleg’s audit runs in parallel; the app launch follows it.","items":[{"t":"Core community preview — first look at the build while Oleg audits","ws":"COMMUNITY","o":"Ryan + Brian"},{"t":"Capture early feedback to carry into investor calls","ws":"COMMUNITY","o":"Ryan + Brian"},{"t":"FIRST PITCH — Wednesday Oct 28","ws":"FUNDRAISE","o":"Ryan + Brian","due":"Oct 28"},{"t":"Open the raise — begin outreach down the prioritized list","ws":"INVESTORS","o":"Ryan","due":"Oct 28"},{"t":"Founder alignment: Ryan + Brian answer the venture case together","ws":"FUNDRAISE","o":"Ryan + Brian","due":"Oct 30"}]},{"n":8,"range":"NOV 2–6","s":"2026-11-02","theme":"Oleg’s audit clears. Launch the first version to the core community.","items":[{"t":"Oleg: audit complete — fixes, improvements and additions landed","ws":"BUILD","o":"Oleg","due":"Nov 6"},{"t":"Launch the first version to the core community","ws":"COMMUNITY","o":"Ryan + Brian + Oleg","due":"Nov 6"},{"t":"Capture early feedback to carry into investor calls","ws":"COMMUNITY","o":"Ryan + Brian"}]}];
+    this._seedDone = true;
+    this.DONE_SEED = {"w0-0":true,"w0-1":true,"w0-2":true,"w0-3":true,"w0-4":true,"w0-5":true,"w0-6":true,"w0-7":true,"w0-8":true,"w0-9":true,"w0-10":true,"w0-11":true,"w0-12":true,"w0-13":true,"w0-14":true,"w0-15":true,"w2-1":true};
+    if (!this.state.checked) this.state.checked = Object.assign({}, this.DONE_SEED);
+    this.WS = [
+      { name: 'Brand / name', owner: 'Ryan + Brian \u2192 Pineapple', d: 'yellow' }, { name: 'Wireframe / MVP', owner: 'Ryan + Brian', d: 'yellow' },
+      { name: 'Onboarding', owner: 'Brian + Lizzie \u00b7 Jeff (TBD)', d: 'yellow' }, { name: 'Build / code', owner: 'Ryan (Claude Code) \u2192 Oleg audit', d: 'grey' }, { name: 'Map of Me', owner: 'Ryan + Brian + Mark', d: 'grey' },
+      { name: 'Model', owner: 'Mark', d: 'green' }, { name: 'UI/UX', owner: 'Ryan \u2192 Jenni (W3)', d: 'yellow' },
+      { name: 'Second brain', owner: 'Oleg', d: 'green' }, { name: 'Privacy / security', owner: 'Mark + Tarek', d: 'yellow' },
+      { name: 'Community', owner: 'Ryan + Brian', d: 'grey' }, { name: 'Legal / entity', owner: 'Sarah + Ryan', d: 'yellow' },
+      { name: 'Deck', owner: 'Ryan + Brian', d: 'grey' }, { name: 'Data room', owner: 'Ryan', d: 'grey' },
+      { name: 'Investors', owner: 'Ryan + Brian', d: 'grey' }, { name: 'Advisors', owner: 'Ryan + Brian', d: 'yellow' }, { name: 'Partners / super nodes', owner: 'Ryan + Brian', d: 'grey' },
+      { name: 'AWS funding (ML Go)', owner: 'Ryan + Jack', d: 'yellow' }, { name: 'Go-to-market', owner: 'Ryan + Brian', d: 'grey' },
+      { name: 'Hiring (developer)', owner: 'Ryan', d: 'yellow' }, { name: 'User testing', owner: 'Ryan + Brian', d: 'yellow' },
+      { name: 'Website + socials', owner: 'Ryan + Brian', d: 'grey' }, { name: 'Budget / use of funds', owner: 'Ryan + Brian', d: 'yellow' }
+    ];
+    this.INFO = {"w0-0":{"d":"","x":[]},"w0-1":{"d":"","x":[]},"w0-2":{"d":"","x":[]},"w0-3":{"d":"","x":[]},"w0-4":{"d":"","x":[]},"w0-5":{"d":"","x":[]},"w0-6":{"d":"Settled before the sprint.","x":["Pineapple is the brand partner. Kickoff call targeted for Mon Sep 21 or Tue Sep 22."]},"w0-7":{"d":"","x":[]},"w0-8":{"d":"","x":[]},"w0-9":{"d":"","x":[]},"w0-10":{"d":"","x":[]},"w0-11":{"d":"","x":[]},"w0-12":{"d":"","x":[]},"w0-13":{"d":"","x":[]},"w0-14":{"d":"","x":[]},"w0-15":{"d":"The experiment started last week.","x":["Oleg ran the first experiments and built a custom bot. Next step is building out the individual use cases."]},"w1-0":{"d":"Seed the branding conversation before we sit down.","x":["Send prompts to both Claude and ChatGPT so the exercise starts from questions that push us deeper on the brand rather than a blank page."]},"w1-1":{"d":"End of day Tuesday.","x":["Oleg needs the updated list of Second Brain use cases, prioritized. Mark owns getting it to him."]},"w1-2":{"d":"Starting Thursday.","x":["With the prioritized list in hand, Oleg moves from the custom-bot experiment to building out the different use cases."]},"w1-3":{"d":"Wednesday, Thursday or Friday — Ryan and Brian only.","x":["Run our own branding exercise using the Claude and ChatGPT prompts as input. This is the one must-do for the two of us this week."]},"w1-4":{"d":"First conversation — Jack is excited.","x":["AWS funding would support building out KOVA privacy, security and safety features. Jack puts the request deck together by the end of next week; AWS should come back inside a week or two; the two-to-three month build starts about a week after that. Being able to tell investors AWS is funding $60–75K and bringing their expertise reads almost like a lead investor."]},"w1-5":{"d":"Get them up the curve before kickoff.","x":["Send the Pineapple team everything we have created around branding and the deck so kickoff does not get spent catching them up."]},"w1-6":{"d":"Brian's focus this week.","x":["Brian works the onboarding experience and passes the current state to Mark by Friday. The overview gets shared with Lizzie and Jeff next week."]},"w1-7":{"d":"Both of us on UI/UX this week.","x":["Wireframe the primary product this week and next; finalize end of next week, including the onboarding prototype."]},"w1-8":{"d":"Book it now so next week runs.","x":["Tarek UI/UX session, Lizzie and Jeff all need dates. Dates still TBD as of Monday."]},"w1-9":{"d":"Monday or Tuesday next week.","x":["Confirm the Pineapple kickoff call for Sep 21 or 22."]},"w1-10":{"d":"Brian takes the conversation tomorrow.","x":["Chuck — the Procter & Gamble and Nabisco operator, angel investing in healthcare. Adviser energy: down the field, looking over our shoulder at how we are positioning. His wisdom may be worth more than his money, and his network is powerful. If he is really into it he will find a way to put money in. It does not have to be Chuck, but somebody like a Chuck."]},"w1-11":{"d":"Ryan has work to share with Brian.","x":["The corporate umbrella website needs to be finalized. The marketing website comes later, once the product is signed on."]},"w1-12":{"d":"This week or next.","x":["Get creative about how we capture what the first 20–50 community members think of the experience: how to make the best use of their time, how to give them value, and how to get value back. First draft this week."]},"w1-13":{"d":"In the next three or four working days.","x":["Ryan and Brian review the budget for this plan — by Tuesday Sep 22 at the latest."]},"w1-14":{"d":"Connections, not curriculum.","x":["Worth evaluating whether any accelerator would form the right relationships for us, independent of what the program itself teaches."]},"w1-15":{"d":"Every week, not ad hoc.","x":["Tarek should be on a standing weekly cadence with us."]},"w2-0":{"d":"The brand engagement formally starts.","x":["Kickoff with Pineapple on Monday or Tuesday, with our branding work and deck already in their hands."]},"w2-1":{"d":"Done — Monday Sep 21.","x":["Lizzie is kicked off. We owe her the Onboarding PDF deck next; she starts her onboarding work once she has it."]},"w2-2":{"d":"Separate from onboarding.","x":["Beyond onboarding, talk to Jeff about the early community on both the practitioner/facilitator side and finding early testers. Jeff is a potential advisor too."]},"w2-3":{"d":"Second Tarek session.","x":["Continue the UI/UX work with Tarek before Jenni is engaged."]},"w2-4":{"d":"So we can answer the questions in the room.","x":["Ryan and Brian need strong talking points and high-level answers on privacy, security and the tech stack when they talk to stakeholders."]},"w2-5":{"d":"Know the flow, not the pixels.","x":["Detailed Map of Me work starts this week. Goal is a working prototype of the flow by Oct 2; high-fidelity designs wait until the week of Oct 12."]},"w2-6":{"d":"Locked by Friday.","x":["The primary product wireframe, including the onboarding prototype, is finalized end of this week so Jenni has something stable to polish."]},"w2-7":{"d":"End of next week, one page.","x":["Comes out of the UI/UX work Ryan, Brian and Tarek are doing together."]},"w2-8":{"d":"Sarah is handling it.","x":["First goal is reinstating the existing entity as the corporate umbrella by next week. Depending on how intensive the process is we may go with a different corporate umbrella name. Entity type — LLC, C Corp, B Corp — still has to be settled before the raise opens."]},"w2-9":{"d":"","x":[]},"w2-10":{"d":"Names and roles, not just names.","x":["Who we would want on board as advisors and what role each one plays. People who have been there and done that help us directly, and investors value knowing that kind of thinking is around the table."]},"w2-11":{"d":"Learned this the hard way before.","x":["A lot of advisors sign up and then are too busy to do anything. We eventually got there with the previous venture by asking for money. Decide the ask before the outreach starts."]},"w2-12":{"d":"Ideal vision-board list first, then who to approach early.","x":["Content creators in the space we may want to partner with. Some of them may be advisors with upside in what we are doing."]},"w2-13":{"d":"They bring their own communities.","x":["Facilitators who run retreats and workshops can bring participants in ahead of the retreat, and the product can integrate the experience back into real life afterward. Who else belongs on the list, and who can be approached."]},"w2-14":{"d":"Tarek raised it today.","x":["List the AI agents we might need. Where it lands depends on what the list turns out to be."]},"w2-15":{"d":"End of next week for the request.","x":["Jack assembles the deck for AWS to request funding. Expect a response inside a week or two."]},"w2-16":{"d":"A living document, not a finished one.","x":["Finalize v1 of the user testing process so the early community work can start against it; it keeps evolving after that."]},"w2-17":{"d":"Which seats, and what each perspective brings.","x":["Beyond Lizzie and Jeff — get clear on who sits in which seat, what perspective each brings, and which perspectives we still need to fill."]},"w2-18":{"d":"Decide, then stand them up.","x":["Which platforms we want, what the presence looks like, and get them live. LinkedIn is the likely first one."]},"w2-19":{"d":"Beyond the first 20–40 core users.","x":["Schedule dedicated time to talk through go-to-market: the initial core community, and then what growth looks like after them."]},"w2-20":{"d":"Needs to be in place before the October handoff.","x":["Probably part-time, to take the Claude Code build the rest of the way. Either someone we already know or someone through lemon.io."]},"w2-21":{"d":"Ongoing work, the two of them together.","x":["Mark and Tarek build out more of the privacy and security architecture."]},"w2-22":{"d":"Not next week — the week after.","x":["Get the session on the calendar for the week of Sep 28: Ryan Foust and his co-founder, plus Mark, Tarek, Ryan and Brian."]},"w3-0":{"d":"About two weeks from here.","x":["Jenni comes in after the Mark review to help finalize the designs. Two weeks puts finalized UI/UX around Oct 14–16."]},"w3-1":{"d":"Monday.","x":["First review of the first pass. Feedback folds in before the Mark presentation Tuesday."]},"w3-2":{"d":"Brian's idea, scoped to a week.","x":["Design and finalize the invitation for our early community members."]},"w3-3":{"d":"Flow and content, not high fidelity.","x":["By Oct 2 we should generally know what Map of Me looks like and what it serves up. High-fidelity designs come the week of Oct 12."]},"w3-4":{"d":"Both attorneys have been spoken to.","x":["Decide which attorney we engage for the fundraising docs and engage them."]},"w3-5":{"d":"Starts once she has the PDF deck.","x":["Lizzie builds her onboarding experience against the deck we sent Sep 24."]},"w3-6":{"d":"Turn watching into product.","x":["Translate the pauses, questions, follow-ups and session-ending judgment observed in Lizzie's session into the onboarding orchestration."]},"w3-7":{"d":"","x":[]},"w3-8":{"d":"Written after the connectors are hooked up.","x":["How the knowledge layer is built given the added connectors.","MCP layer for the integrations — what that pattern looks like here, fleshed out.","When to lean on existing harnesses (LangChain DeepAgents, AWS Bedrock AgentCore harness) instead of hand-rolling an agent loop. Direction: a general-purpose agent layer that picks its own tools and does web search, not a handmade QA bot."]},"w3-9":{"d":"Pick the person.","x":["Interviews and selection so they are onboarded before the October handoff."]},"w3-10":{"d":"A week or two after the request.","x":["AWS should come back with a yes; the build starts about a week after that."]},"w3-11":{"d":"Two things at once: product and architecture.","x":["Demo the product, or a version of it, then take their feedback on both the product itself and the security and privacy architecture."]},"w4-0":{"d":"Coding waits for these.","x":["Designs finalize this week and next; Ryan starts the Claude Code build once they are done."]},"w4-1":{"d":"","x":[]},"w4-2":{"d":"Needed before the raise opens.","x":["The list of investors we want to approach, in priority order."]},"w4-3":{"d":"","x":[]},"w4-4":{"d":"","x":[]},"w4-5":{"d":"","x":[]},"w4-6":{"d":"","x":[]},"w4-7":{"d":"Before the handoff, not during it.","x":["The developer should be onboarded and productive by the time the Claude Code designs are ready to hand off in October."]},"w4-8":{"d":"Two to three months with AWS.","x":["The engagement starts about a week after the funding decision comes back."]},"w4-9":{"d":"Simple is fine.","x":["Once the product is signed on, the marketing website just needs to be nailed down."]},"w4-10":{"d":"End of her second week.","x":["Lizzie starts around Wednesday Sep 23, so this lands about two weeks later. The facilitation is the part we cannot read off a document: where she pauses, what she asks, how she follows up, and how she decides a session is complete and should wrap until next time."]},"w5-0":{"d":"The gate before code.","x":["Jenni’s two weeks from Sep 30 land finalized, production-ready UI/UX by Fri Oct 16."]},"w5-1":{"d":"Last thing we design.","x":["High-fidelity Map of Me designs land after the flow has been proven by the Oct 2 prototype."]},"w5-2":{"d":"About a week of coding.","x":["Once designs are finalized Ryan works with Claude Code on the initial build. Roughly one week, then Oleg audits."]},"w5-3":{"d":"Four weeks from the Sep 21 kickoff.","x":["Pineapple asked for four weeks from their start. Starting next week puts the completed deck at the end of the week of Oct 16."]},"w5-4":{"d":"","x":[]},"w5-5":{"d":"","x":[]},"w5-6":{"d":"The handoff.","x":["Ryan hands the Claude Code build to the developer to take the rest of the way."]},"w5-7":{"d":"Goes in the data room.","x":["A use-of-funds model for the raise, built before investor conversations start."]},"w6-0":{"d":"End of the coding week.","x":["Hands to Oleg for audit on Monday."]},"w6-1":{"d":"","x":[]},"w6-2":{"d":"Name and entity both have to be settled.","x":["Solid on the company name, with the entity set up, before we start investor conversations."]},"w6-3":{"d":"","x":[]},"w6-4":{"d":"","x":[]},"w6-5":{"d":"","x":[]},"w6-6":{"d":"Live before the raise opens.","x":["The marketing website is up."]},"w6-7":{"d":"Presence in place before outreach.","x":["Socials live, LinkedIn included."]},"w7-0":{"d":"Preview, not launch.","x":["With Oleg’s two-week audit running Oct 26 – Nov 6, the first version launches the week of Nov 2. Core community can preview the build before then."]},"w7-1":{"d":"","x":[]},"w7-2":{"d":"Day 45.","x":["The first pitch. Everything in the 45 days points here."]},"w7-3":{"d":"The raise opens.","x":["Outreach begins down the prioritized list, with the deck, data room, docs, name and entity already in place."]},"w7-4":{"d":"","x":[]},"w2-23":{"d":"EOD Thursday Sep 24.","x":["What we owe Lizzie after Monday’s kickoff. Her onboarding work starts once it is in her hands."]},"w2-24":{"d":"Not yet scheduled.","x":["Jeff has not had his kickoff. Get a date on the calendar; the PDF we made for Lizzie is the walkthrough material."]},"w2-25":{"d":"Ready to present Monday.","x":["First pass complete by end of week so it can go to Tarek and Brian on Mon Sep 28, then to Mark on Tue Sep 29."]},"w3-12":{"d":"Tuesday.","x":["Second review, with Tarek and Brian’s feedback already folded in. Jenni starts after this."]},"w3-13":{"d":"Mid-week.","x":["Connects the bot Oleg built last week to the tools we actually work in. Design doc and use cases follow once this is in."]},"w3-14":{"d":"About an afternoon.","x":["Take the existing agent and run it on a schedule or trigger. First of the use cases, easy first."]},"w4-11":{"d":"Extra plug-ins, not new engineering.","x":["Alignment / philosophy agent: recent meetings, Slack and product work against our tenets.","On-track agent: goals and priorities vs. what we are building; connects to the Notion Kova Plan.","Meeting synthesis agent: tag the bot in Slack for weekly themes and cross-meeting comparisons.","Open-thread research agent: research questions left open in a meeting, come back with a short report.","Linear / follow-up agent: nudge on issues sitting two weeks or more.","Hard tier (safety, conversation QA, app QA, feedback agents) needs live user data and a privacy/safety discussion first — not in this sprint."]},"w6-8":{"d":"Oleg probably needs two weeks.","x":["Audit starts once the initial build is in. Fixes, improvements and additions land through the week of Nov 2. First version launches when this clears."]},"w8-0":{"d":"End of Oleg’s second week.","x":[]},"w8-1":{"d":"First version out.","x":["Sequence: Ryan first pass → Tarek/Brian/Mark review → Jenni finalizes (2 wks) → Ryan + Claude Code (1 wk) → Oleg audit (2 wks) → launch."]},"w8-2":{"d":"","x":[]}};
+    this.REVIEW = [
+      { title: 'Priorities + decisions', prompts: ['What are the three most important outcomes this week?', 'What changed since last week?', 'What decisions must Ryan + Brian make?', 'What is blocking the critical path?', 'What are we deliberately not doing?'] },
+      { title: 'Product', prompts: ['Status: green / yellow / red?', 'Current milestone and next milestone?', 'Biggest blocker?', 'Decision required?'] },
+      { title: 'Model', prompts: ['What improved?', 'What is failing?', 'What does Mark need?'] },
+      { title: 'Onboarding / practitioners', prompts: ['Status?', 'Current learning?', 'Decision required?'] },
+      { title: 'UI/UX', prompts: ['Deliverable this week?', 'Risk?'] },
+      { title: 'Brand', prompts: ['Current milestone?', 'Decision required?'] },
+      { title: 'Community', prompts: ['Invited / started / completed onboarding / interviewed?', 'Major learning?'] },
+      { title: 'Fundraising', prompts: ['Deck? Data room? Investor list?', 'Warm intros? Friendly pitches?', 'Meetings scheduled?'] },
+      { title: 'Second brain', prompts: ['What is working?', 'Next integration?'] },
+      { title: 'Privacy / security', prompts: ['Status?', 'Open risks?'] },
+      { title: 'Budget', prompts: ['Committed / paid / remaining (of $40K)?', 'New decision required?'] },
+      { title: 'Top 3 blockers + next 7 days', prompts: ['Name the top 3 blockers.', 'Commit to the next 7 days \u2014 three outcomes.'] }
+    ];
+    this.DEFAULT_BLOCKERS = [
+      { id: 'b1', title: 'Jeff meeting not scheduled', needs: 'Review where onboarding stands and walk him through the onboarding experience PDF. Needs: a date on the calendar this week or next.', meta: 'BLOCKS W3 \u00b7 Ryan' },
+      { id: 'b2', title: 'Corporate umbrella \u2014 process weight unknown', needs: 'If incorporating the umbrella is intensive we may go with a different corporate structure. Needs: a call on structure before the attorney is engaged Oct 2.', meta: 'BLOCKS LEGAL \u00b7 Ryan' },
+      { id: 'b3', title: 'Jenni engaged part-time from Sep 28', needs: 'Production-ready UI/UX by Oct 16 assumes Ryan, Brian and Tarek resolve most of the work first and Jenni polishes. Needs: the wireframe locked Sep 25, no slippage.', meta: 'BLOCKS OCT 16 \u00b7 Ryan + Brian' }
+    ];
+    this.WALK = [
+      { title: 'The mission', cap: 'September 14 to October 28 \u2014 45 days. Run our own branding exercise, lock the product wireframe, get Jenni to production-ready UI/UX, put real people through the experience, and pitch.' }
+    ].concat(this.PLAN.map((w, i) => ({ week: i, title: 'Week ' + w.n + ' \u00b7 ' + w.range, cap: w.theme + ' The panel on the left shows this week\u2019s tasks, workstreams, and owners.' }))).concat([
+      { title: 'The gates', cap: 'Sep 25 wireframe locked \u00b7 Oct 2 Map of Me prototype \u00b7 Oct 9 first participants \u00b7 Oct 16 UI/UX production ready \u00b7 Oct 28 first pitch. The timeline at the bottom marks all five.' },
+      { title: 'How we run it', cap: 'Check off tasks as they land \u2014 the progress bar tracks each week. Blockers and open decisions stay visible until cleared or logged. Workstream dots: yellow twice in a row means intervene, red means discuss now. The Weekly review button walks the full 12-section review.' }
+    ]);
+    this.DEFAULT_DECISIONS = [
+      { id: 'd1', title: 'Entity type \u2014 LLC vs. C Corp vs. B Corp', meta: 'RYAN + BRIAN \u00b7 BY SEP 25', desc: 'The entity has to be set up before the raise opens. Decide the structure, then file. If the process is intensive we may go with a different corporate structure.' },
+      { id: 'd8', title: 'Accelerators \u2014 worth it for the connections?', meta: 'RYAN + BRIAN \u00b7 BY OCT 2', desc: 'Not for what the program teaches, but for the relationships the right accelerator would form. Evaluate and decide before the raise opens.' },
+      { id: 'd7', title: 'Advisors \u2014 do we ask them to invest?', meta: 'RYAN + BRIAN \u00b7 BY SEP 25', desc: 'Advisors who sign up without money in often turn out too busy to contribute. Decide the ask \u2014 pure advisory, advisory plus a check, or upside for content creators and super nodes \u2014 before outreach begins.' },
+      { id: 'd6', title: 'Practitioner scope \u2014 feedback on our work vs. their own version', meta: 'RYAN + BRIAN \u00b7 BY SEP 21', desc: 'Leaning toward Lizzie and Jeff reacting to what we are building rather than producing their own onboarding experience. We have more context on what we are building than they will; the invitation is into our open questions. Compresses their ask from two weeks each to about one.' },
+      { id: 'd2', title: 'Fundraising attorney \u2014 which of the two we engage', meta: 'RYAN \u00b7 BY OCT 2', desc: 'Both attorneys under consideration have been spoken to. Decide and engage for the fundraising docs.' },
+      { id: 'd3', title: 'Map of Me reveal \u2014 full reveal vs. progressive reveal', meta: 'R + B + MARK \u00b7 BY OCT 2', desc: 'The Oct 2 prototype should establish the flow and what we serve up. High-fidelity designs follow the week of Oct 12.' },
+      { id: 'd4', title: 'Name \u2014 new name vs. KOVA-for-now', meta: 'RYAN + BRIAN \u00b7 BY OCT 23', desc: 'Pineapple should reach a name or finalists before the first pitch. If it is not settled, pitch as KOVA and treat the name as in progress.' },
+      { id: 'd5', title: 'Second Brain \u2014 first proactive workflow', meta: 'MARK + TEAM \u00b7 BY OCT 9', desc: 'One workflow, chosen off what the prioritized use cases actually surface. Not eight agents.' }
+    ];
+  }
+  componentDidMount() {
+    this.onKey = (e) => {
+      if (this.state.walkIdx == null) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); this.walkStep(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); this.walkStep(-1); }
+      else if (e.key === 'Escape') this.setState({ walkIdx: null });
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+  walkStep(dir) {
+    const i = this.state.walkIdx + dir;
+    if (i < 0) return;
+    if (i >= this.WALK.length) { this.setState({ walkIdx: null }); return; }
+    this.setState({ walkIdx: i });
+  }
+  save(patch) {
+    this.setState(patch, () => {
+      const s = this.state;
+      localStorage.setItem(this.KEY, JSON.stringify({ checked: s.checked, ws: s.ws, owner: s.owner, week: s.week, view: s.view, blockers: s.blockers, budget: s.budget, investors: s.investors, order: s.order, slackUrl: s.slackUrl, decisions: s.decisions, log: s.log, notes: s.notes, custom: s.custom, edits: s.edits, hidden: s.hidden }));
+    });
+  }
+  orderedKeys(n, customMap, hiddenMap, orderMap) {
+    const w = this.PLAN.find(p => p.n === n);
+    const keys = w.items.map((_, j) => 'w' + n + '-' + j).filter(x => !hiddenMap[x]).concat((customMap[n] || []).map(c => c.id));
+    const ord = orderMap[n] || [];
+    return ord.filter(x => keys.includes(x)).concat(keys.filter(x => !ord.includes(x)));
+  }
+  moveTask(k, srcW, dstW, beforeK) {
+    const s = this.state, patch = {};
+    let newId = k, customMap = s.custom, hiddenMap = s.hidden;
+    if (srcW !== dstW) {
+      const customCopy = Object.assign({}, s.custom);
+      const isCustom = k.charAt(0) !== 'w';
+      let base = { t: '', ws: 'GENERAL', o: 'Unassigned', due: '' };
+      if (isCustom) base = (customCopy[srcW] || []).find(c => c.id === k) || base;
+      else { const src = this.PLAN.find(p => p.n === srcW); const it = src.items[parseInt(k.split('-')[1])]; if (it) base = { t: it.t, ws: it.ws, o: it.o, due: it.due || '' }; }
+      const m = Object.assign({}, base, s.edits[k] || {});
+      if (isCustom) {
+        customCopy[srcW] = (customCopy[srcW] || []).filter(c => c.id !== k);
+        customCopy[dstW] = (customCopy[dstW] || []).concat([{ id: k, t: m.t, ws: m.ws, o: m.o, due: m.due || '' }]);
+      } else {
+        newId = 't' + Date.now();
+        customCopy[dstW] = (customCopy[dstW] || []).concat([{ id: newId, t: m.t, ws: m.ws, o: m.o, due: m.due || '' }]);
+        patch.hidden = hiddenMap = Object.assign({}, s.hidden, { [k]: true });
+        if (s.checked[k]) patch.checked = Object.assign({}, s.checked, { [newId]: true });
+      }
+      patch.custom = customMap = customCopy;
+    }
+    const orderCopy = Object.assign({}, s.order);
+    const dstKeys = this.orderedKeys(dstW, customMap, hiddenMap, s.order).filter(x => x !== k && x !== newId);
+    const idx = beforeK ? dstKeys.indexOf(beforeK) : -1;
+    if (idx >= 0) dstKeys.splice(idx, 0, newId); else dstKeys.push(newId);
+    orderCopy[dstW] = dstKeys;
+    if (srcW !== dstW) orderCopy[srcW] = this.orderedKeys(srcW, customMap, hiddenMap, s.order).filter(x => x !== k);
+    patch.order = orderCopy;
+    this.save(patch);
+  }
+  weekRows(n) {
+    const s = this.state, w = this.PLAN.find(p => p.n === n), rm = {};
+    w.items.forEach((it, j) => { const k = 'w' + n + '-' + j; rm[k] = Object.assign({ k, t: it.t, ws: it.ws, o: it.o, due: it.due || '' }, s.edits[k] || {}); });
+    (s.custom[n] || []).forEach(c => { rm[c.id] = Object.assign({ k: c.id, t: c.t, ws: c.ws, o: c.o, due: c.due || '' }, s.edits[c.id] || {}); });
+    return this.orderedKeys(n, s.custom, s.hidden, s.order).map(k => rm[k]).filter(Boolean);
+  }
+  taskLine(r, md) {
+    const s = this.state, done = !!s.checked[r.k];
+    const meta = ' (' + r.ws + ' \u00b7 ' + r.o + (r.due ? ' \u00b7 due ' + r.due : '') + ')';
+    return md ? '- [' + (done ? 'x' : ' ') + '] ' + r.t + meta : (done ? '\u2705 ' : '\u2B1C ') + r.t + meta;
+  }
+  buildDigest(md) {
+    const s = Object.assign({}, this.state, { blockers: this.state.blockers ?? this.DEFAULT_BLOCKERS, decisions: this.state.decisions ?? this.DEFAULT_DECISIONS, log: this.state.log ?? [] });
+    const wIdx = s.week == null ? this.currentWeekIdx() : s.week, w = this.PLAN[wIdx];
+    const rows = this.weekRows(w.n), done = rows.filter(r => s.checked[r.k]), open = rows.filter(r => !s.checked[r.k]);
+    const h = md ? '## ' : '*', he = md ? '' : '*';
+    const L = [(md ? '# ' : '*') + 'KOVA \u00b7 Week ' + w.n + ' (' + w.range + ')' + (md ? '' : '*'), w.theme, ''];
+    L.push(h + 'Done (' + done.length + '/' + rows.length + ')' + he);
+    done.forEach(r => L.push(this.taskLine(r, md)));
+    if (!done.length) L.push(md ? '_nothing yet_' : '_nothing yet_');
+    L.push('', h + 'Still open' + he);
+    open.forEach(r => L.push(this.taskLine(r, md)));
+    const blockers = s.blockers.filter(b => !b.resolved);
+    L.push('', h + 'Blockers (' + blockers.length + ')' + he);
+    blockers.forEach(b => L.push('- ' + b.title));
+    if (!blockers.length) L.push('_none_');
+    L.push('', h + 'Decisions needed' + he);
+    s.decisions.forEach(d => L.push('- ' + d.title + ' \u2014 ' + d.meta));
+    if (!s.decisions.length) L.push('_none_');
+    return L.join('\n');
+  }
+  buildFullPlanMd() {
+    const s = Object.assign({}, this.state, { blockers: this.state.blockers ?? this.DEFAULT_BLOCKERS, decisions: this.state.decisions ?? this.DEFAULT_DECISIONS, log: this.state.log ?? [] });
+    const L = ['# KOVA 45-Day Sprint \u2014 Full Plan', ''];
+    this.PLAN.forEach(w => {
+      L.push('## Week ' + w.n + ' \u00b7 ' + w.range, w.theme, '');
+      this.weekRows(w.n).forEach(r => L.push(this.taskLine(r, true)));
+      L.push('');
+    });
+    const blockers = s.blockers.filter(b => !b.resolved);
+    L.push('## Blockers');
+    blockers.forEach(b => L.push('- [ ] ' + b.title));
+    if (!blockers.length) L.push('_none_');
+    L.push('', '## Decisions needed');
+    s.decisions.forEach(d => L.push('- [ ] ' + d.title + ' \u2014 ' + d.meta));
+    L.push('', '## Decision log');
+    s.log.forEach(d => L.push('- [x] ' + d.title + ' \u2192 ' + d.outcome + ' (' + d.date + ')'));
+    if (!s.log.length) L.push('_empty_');
+    return L.join('\n');
+  }
+  currentWeekIdx() {
+    const now = new Date();
+    for (let i = this.PLAN.length - 1; i >= 0; i--) if (now >= new Date(this.PLAN[i].s + 'T00:00:00')) return i;
+    return 0;
+  }
+  renderVals() {
+    const s = this.state;
+    const target = new Date('2026-10-28T00:00:00'), freeze = new Date('2026-10-16T00:00:00'), end = new Date('2026-10-30T00:00:00');
+    const start = new Date('2026-09-14T00:00:00'), now = new Date(), day = 86400000;
+    const daysLeft = Math.max(0, Math.ceil((target - now) / day));
+    const elapsed = Math.floor((now - start) / day) + 1;
+    const pct = Math.min(1, Math.max(0, (now - start) / (end - start)));
+    const walkOn = s.walkIdx != null;
+    const walkCur = walkOn ? this.WALK[s.walkIdx] : null;
+    const wIdx = walkOn && walkCur.week != null ? walkCur.week : (s.week == null ? this.currentWeekIdx() : s.week);
+    const week = this.PLAN[wIdx];
+    const status = this.props.status ?? 'On track';
+    const statusColor = status === 'On track' ? 'oklch(0.72 0.11 155)' : status === 'At risk' ? 'oklch(0.75 0.12 85)' : 'oklch(0.68 0.14 30)';
+    const gold = 'oklch(0.75 0.12 85)', green = 'oklch(0.72 0.11 155)', red = 'oklch(0.68 0.14 30)', grey = 'oklch(0.5 0.01 75)';
+    const wsColor = { green, yellow: gold, red, grey };
+    const owners = ['All', 'Ryan', 'Brian', 'Mark', 'Lizzie', 'Jeff', 'Sarah', 'Jenni', 'Pineapple', 'Tarek', 'Oleg', 'Second Brain'];
+    const rowMap = {};
+    week.items.forEach((it, i) => { const k = 'w' + week.n + '-' + i, info = this.INFO[k] || { d: '', x: [] }; rowMap[k] = { k, custom: false, t: it.t, ws: it.ws, o: it.o, due: it.due || '', d: info.d, x: info.x }; });
+    (s.custom[week.n] || []).forEach(c => { rowMap[c.id] = { k: c.id, custom: true, t: c.t, ws: c.ws, o: c.o, due: c.due || '', d: '', x: [] }; });
+    const allRows = this.orderedKeys(week.n, s.custom, s.hidden, s.order).map(k => rowMap[k]).filter(Boolean).map(r => Object.assign(r, s.edits[r.k] || {}));
+    const visible = allRows.filter(r => s.owner === 'All' || r.o.includes(s.owner));
+    const doneCount = allRows.filter(r => s.checked[r.k]).length;
+    const blockers = s.blockers ?? this.DEFAULT_BLOCKERS;
+    const decisions = s.decisions ?? this.DEFAULT_DECISIONS;
+    const rIdx = Math.min(s.reviewIdx, this.REVIEW.length - 1);
+    const fmtDay = (dt) => dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const dueOpts = ['no date'];
+    for (let i = 0; i < 5; i++) { const dt = new Date(week.s + 'T00:00:00'); dt.setDate(dt.getDate() + i); dueOpts.push(fmtDay(dt)); }
+    const OWNER_OPTS = [...new Set(['Ryan', 'Brian', 'Ryan + Brian', 'Ryan + Brian + Mark', 'Mark', 'Lizzie', 'Jeff', 'Sarah', 'Jenni', 'Pineapple', 'Tarek', 'Oleg', 'Jack', 'Ryan + Jack', 'Ryan + Mark', 'Mark + Tarek', 'Brian + Lizzie', 'Ryan + Brian + Tarek', 'Ryan + Brian + Mark + Tarek', 'Ryan + Brian + Pineapple', 'Ryan + Brian + Lizzie', 'Ryan + Brian + Jeff', 'Mark + Oleg', 'Mark + Second Brain team', 'Unassigned'])];
+    return {
+      daysLeft, freezeLabel: String(Math.max(0, Math.ceil((freeze - now) / day))),
+      sprintDayLabel: elapsed < 1 ? 'T\u2212' + (1 - elapsed) : Math.min(elapsed, 45) + '/45',
+      sprintDaySub: elapsed < 1 ? 'days to kickoff' : 'sprint day',
+      ringOffset: (138.23 * (1 - pct)).toFixed(1),
+      showTodayMarker: pct > 0 && pct < 1, todayPct: (pct * 100).toFixed(1) + '%',
+      statusLabel: status, statusColor, statusBorder: statusColor.replace(')', ' / 0.45)'),
+      weekTabs: this.PLAN.map((w, i) => ({
+        label: 'W' + w.n, pick: () => this.save({ week: i }),
+        bg: i === wIdx ? 'oklch(0.24 0.02 85)' : 'oklch(0.18 0.01 70)',
+        border: i === wIdx ? 'oklch(0.4 0.06 85)' : 'oklch(0.26 0.012 70)',
+        color: i === wIdx ? gold : 'oklch(0.65 0.015 75)'
+      })),
+      ownerChips: owners.map(o => ({
+        name: o, pick: () => this.save({ owner: o }),
+        bg: o === s.owner ? 'oklch(0.24 0.02 85)' : 'oklch(0.18 0.01 70)',
+        border: o === s.owner ? 'oklch(0.4 0.06 85)' : 'oklch(0.26 0.012 70)',
+        color: o === s.owner ? gold : 'oklch(0.65 0.015 75)'
+      })),
+      weekTitle: 'Week ' + week.n, weekRange: week.range, weekTheme: week.theme,
+      progressPct: (allRows.length ? Math.round(doneCount / allRows.length * 100) : 0) + '%',
+      progressLabel: doneCount + '/' + allRows.length,
+      items: visible.map(r => {
+        const k = r.k, done = !!s.checked[k], open = !!s.expanded[k];
+        const setEditField = (patch) => this.save({ edits: Object.assign({}, s.edits, { [k]: Object.assign({}, s.edits[k], patch) }) });
+        return {
+          title: r.t, ws: r.ws,
+          owner: r.o, ownerOpts: OWNER_OPTS.includes(r.o) ? OWNER_OPTS : [r.o].concat(OWNER_OPTS),
+          setOwner: (e) => setEditField({ o: e.target.value }),
+          due: r.due || 'no date',
+          dueOpts: !r.due || dueOpts.includes(r.due) ? dueOpts : [r.due].concat(dueOpts),
+          setDue: (e) => setEditField({ due: e.target.value === 'no date' ? '' : e.target.value }),
+          dueBorder: r.due ? 'oklch(0.36 0.05 85)' : 'oklch(0.28 0.012 70)',
+          dueColor: r.due ? 'oklch(0.78 0.1 85)' : 'oklch(0.6 0.015 75)',
+          desc: r.d, hasDesc: !!(r.d && r.d.trim()), detail: r.x || [], noDetail: !(r.x && r.x.length), expanded: open,
+          chev: open ? '\u2212' : '+',
+          editing: s.editingKey === k, notEditing: s.editingKey !== k,
+          expand: () => this.setState({ expanded: Object.assign({}, s.expanded, { [k]: !open }) }),
+          startEdit: (e) => { e.stopPropagation(); this.setState({ editingKey: k, editT: r.t, editD: r.d, editW: r.ws, editO: r.o, editDue: r.due || '', editX: (r.x || []).join('\n') }); },
+          dragStart: (e) => { this.drag = { k, w: week.n }; e.dataTransfer.effectAllowed = 'move'; },
+          dragOver: (e) => { if (this.drag) e.preventDefault(); },
+          drop: (e) => { e.preventDefault(); e.stopPropagation(); if (this.drag && this.drag.k !== k) this.moveTask(this.drag.k, this.drag.w, week.n, k); this.drag = null; },
+          remove: () => {
+            if (r.custom) {
+              const list = (s.custom[week.n] || []).filter(c => c.id !== k);
+              this.save({ custom: Object.assign({}, s.custom, { [week.n]: list }), editingKey: null });
+            } else {
+              this.save({ hidden: Object.assign({}, s.hidden, { [k]: true }), editingKey: null });
+            }
+          },
+          toggle: (e) => { e.stopPropagation(); this.save({ checked: Object.assign({}, s.checked, { [k]: !done }) }); },
+          check: done ? '\u2713' : '', boxBg: done ? green : 'transparent',
+          boxBorder: done ? green : 'oklch(0.4 0.015 75)',
+          rowBorder: open ? 'oklch(0.34 0.03 85)' : 'oklch(0.24 0.01 70)',
+          deco: done ? 'line-through' : 'none', opacity: done ? 0.55 : 1
+        };
+      }),
+      stopProp: (e) => e.stopPropagation(),
+      shareOpen: !!s.shareOpen,
+      openShare: () => this.setState({ shareOpen: true, slackMsg: '', copyMsg: '' }),
+      closeShare: () => this.setState({ shareOpen: false }),
+      slackUrl: s.slackUrl || '',
+      setSlackUrl: (e) => this.save({ slackUrl: e.target.value.trim() }),
+      slackMsgShown: !!s.slackMsg, slackMsg: s.slackMsg,
+      slackMsgColor: (s.slackMsg || '').startsWith('Posted') ? 'oklch(0.65 0.14 145)' : 'oklch(0.75 0.12 35)',
+      postSlack: () => {
+        const url = (s.slackUrl || '').trim();
+        if (!url.startsWith('https://hooks.slack.com/')) { this.setState({ slackMsg: 'That doesn\u2019t look like a Slack webhook URL.' }); return; }
+        this.setState({ slackMsg: 'Posting\u2026' });
+        fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: this.buildDigest(false) }) })
+          .then(() => this.setState({ slackMsg: 'Posted \u2014 check your channel. (If nothing arrived, the webhook URL may be wrong.)' }))
+          .catch(() => this.setState({ slackMsg: 'Couldn\u2019t reach Slack \u2014 check the URL and your connection.' }));
+      },
+      copyMsgShown: !!s.copyMsg, copyMsg: s.copyMsg,
+      copyNotion: () => navigator.clipboard.writeText(this.buildFullPlanMd()).then(() => this.setState({ copyMsg: 'Copied \u2014 paste into any Notion page.' })),
+      copyDigest: () => navigator.clipboard.writeText(this.buildDigest(true)).then(() => this.setState({ copyMsg: 'Weekly digest copied.' })),
+      weekView: s.view !== 'plan' && s.view !== 'today', planView: s.view === 'plan', todayView: s.view === 'today',
+      pickWeekView: () => this.save({ view: 'week' }),
+      pickPlanView: () => this.save({ view: 'plan' }),
+      pickTodayView: () => this.save({ view: 'today' }),
+      vtBg: s.view === 'today' ? 'oklch(0.24 0.02 85)' : 'oklch(0.18 0.01 70)',
+      vtColor: s.view === 'today' ? gold : 'oklch(0.62 0.015 75)',
+      vwBg: s.view !== 'plan' ? 'oklch(0.24 0.02 85)' : 'oklch(0.18 0.01 70)',
+      vwColor: s.view !== 'plan' ? gold : 'oklch(0.62 0.015 75)',
+      vpBg: s.view === 'plan' ? 'oklch(0.24 0.02 85)' : 'oklch(0.18 0.01 70)',
+      vpColor: s.view === 'plan' ? gold : 'oklch(0.62 0.015 75)',
+      planWeeks: this.PLAN.map((w, i) => {
+        const rm = {};
+        w.items.forEach((it, j) => { const k = 'w' + w.n + '-' + j; rm[k] = Object.assign({ k, t: it.t, ws: it.ws, o: it.o, due: it.due || '' }, s.edits[k] || {}); });
+        (s.custom[w.n] || []).forEach(c => { rm[c.id] = Object.assign({ k: c.id, t: c.t, ws: c.ws, o: c.o, due: c.due || '' }, s.edits[c.id] || {}); });
+        const rows = this.orderedKeys(w.n, s.custom, s.hidden, s.order).map(k => rm[k]).filter(Boolean)
+          .filter(r => s.owner === 'All' || r.o.includes(s.owner));
+        const done = rows.filter(r => s.checked[r.k]).length;
+        return {
+          n: w.n, range: w.range, theme: w.theme, count: done + '/' + rows.length,
+          border: i === wIdx ? 'oklch(0.4 0.06 85)' : 'oklch(0.26 0.012 70)',
+          headBg: i === wIdx ? 'oklch(0.21 0.018 85)' : 'oklch(0.165 0.009 70)',
+          headColor: i === wIdx ? gold : 'oklch(0.75 0.015 78)',
+          open: () => this.save({ week: i, view: 'week' }),
+          dragOver: (e) => { if (this.drag) e.preventDefault(); },
+          drop: (e) => { e.preventDefault(); if (this.drag) this.moveTask(this.drag.k, this.drag.w, w.n, null); this.drag = null; },
+          notAdding: s.addingWk !== w.n, adding: s.addingWk === w.n,
+          startAdd: () => this.setState({ addingWk: w.n }),
+          confirmAdd: () => {
+            const inp = this.fpNew.current;
+            if (!inp || !inp.value.trim()) { this.setState({ addingWk: null }); return; }
+            const nt = { id: 't' + Date.now(), t: inp.value.trim(), ws: 'GENERAL', o: 'Unassigned', due: '' };
+            inp.value = '';
+            this.save({ custom: Object.assign({}, s.custom, { [w.n]: (s.custom[w.n] || []).concat([nt]) }), addingWk: null });
+          },
+          tasks: rows.map(r => {
+            const isDone = !!s.checked[r.k], edit = s.fpKey === r.k;
+            return {
+              title: r.t, meta: r.ws + ' \u00b7 ' + r.o + (r.due ? ' \u00b7 due ' + r.due : ''),
+              editing: edit, notEditing: !edit,
+              rowBorder: edit ? 'oklch(0.4 0.06 85)' : 'transparent',
+              startEdit: () => this.setState({ fpKey: r.k, fpT: r.t, fpDue: r.due || 'no date', fpWk: 'Week ' + w.n, fpSrcWk: w.n }),
+              dragStart: (e) => { this.drag = { k: r.k, w: w.n }; e.dataTransfer.effectAllowed = 'move'; },
+              dragOver: (e) => { if (this.drag) e.preventDefault(); },
+              drop: (e) => { e.preventDefault(); e.stopPropagation(); if (this.drag && this.drag.k !== r.k) this.moveTask(this.drag.k, this.drag.w, w.n, r.k); this.drag = null; },
+              toggle: (e) => { e.stopPropagation(); this.save({ checked: Object.assign({}, s.checked, { [r.k]: !isDone }) }); },
+              check: isDone ? '\u2713' : '', boxBg: isDone ? green : 'transparent',
+              boxBorder: isDone ? green : 'oklch(0.4 0.015 75)',
+              deco: isDone ? 'line-through' : 'none', opacity: isDone ? 0.5 : 1
+            };
+          })
+        };
+      }),
+      todaySections: (() => {
+        if (s.view !== 'today') return [];
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        const yr = today.getFullYear();
+        const all = [];
+        this.PLAN.forEach((w, i) => {
+          w.items.map((it, j) => Object.assign({ k: 'w' + w.n + '-' + j, t: it.t, ws: it.ws, o: it.o, due: it.due || '' }, s.edits['w' + w.n + '-' + j] || {}))
+            .filter(r => !s.hidden[r.k])
+            .concat((s.custom[w.n] || []).map(c => Object.assign({ k: c.id, t: c.t, ws: c.ws, o: c.o, due: c.due || '' }, s.edits[c.id] || {})))
+            .filter(r => s.owner === 'All' || r.o.includes(s.owner))
+            .forEach(r => all.push(Object.assign(r, { wn: w.n, wi: i })));
+        });
+        const mkRow = (r, extra) => {
+          const isDone = !!s.checked[r.k];
+          return {
+            title: r.t, meta: 'W' + r.wn + ' \u00b7 ' + r.ws + ' \u00b7 ' + r.o + (extra ? ' \u00b7 ' + extra : ''),
+            open: () => this.save({ week: r.wi, view: 'week' }),
+            toggle: (e) => { e.stopPropagation(); this.save({ checked: Object.assign({}, s.checked, { [r.k]: !isDone }) }); },
+            check: isDone ? '\u2713' : '', boxBg: isDone ? green : 'transparent',
+            boxBorder: isDone ? green : 'oklch(0.4 0.015 75)',
+            deco: isDone ? 'line-through' : 'none', opacity: isDone ? 0.5 : 1
+          };
+        };
+        const parseDue = (d) => { const dt = new Date(d + ', ' + yr); dt.setHours(0, 0, 0, 0); return isNaN(dt) ? null : dt; };
+        const undone = all.filter(r => !s.checked[r.k]);
+        const overdue = undone.filter(r => { const d = r.due && parseDue(r.due); return d && d < today; });
+        const dueToday = undone.filter(r => { const d = r.due && parseDue(r.due); return d && d.getTime() === today.getTime(); });
+        const curW = this.currentWeekIdx();
+        const thisWeek = undone.filter(r => r.wi === curW && !r.due);
+        return [
+          { title: 'Overdue', color: 'oklch(0.78 0.1 35)', border: 'oklch(0.32 0.05 30)', count: overdue.length + '', empty: !overdue.length, emptyMsg: 'Nothing overdue.', rows: overdue.map(r => mkRow(r, 'was due ' + r.due)) },
+          { title: 'Due today', color: gold, border: 'oklch(0.34 0.05 85)', count: dueToday.length + '', empty: !dueToday.length, emptyMsg: 'Nothing due today \u2014 set due dates from any task row.', rows: dueToday.map(r => mkRow(r, 'due today')) },
+          { title: 'This week \u00b7 no date', color: 'oklch(0.75 0.015 78)', border: 'oklch(0.28 0.012 70)', count: thisWeek.length + '', empty: !thisWeek.length, emptyMsg: 'Everything this week has a date or is done.', rows: thisWeek.map(r => mkRow(r, '')) }
+        ];
+      })(),
+      fpNew: this.fpNew,
+      fpT: s.fpT, setFpT: (e) => this.setState({ fpT: e.target.value }),
+      fpWk: s.fpWk, fpWkOpts: this.PLAN.map(w => 'Week ' + w.n),
+      setFpWk: (e) => this.setState({ fpWk: e.target.value, fpDue: 'no date' }),
+      fpDue: s.fpDue,
+      fpDueOpts: (() => {
+        const n = parseInt(String(s.fpWk).replace('Week ', '')) || 1;
+        const wk = this.PLAN.find(p => p.n === n), opts = ['no date'];
+        for (let i = 0; i < 5; i++) { const dt = new Date(wk.s + 'T00:00:00'); dt.setDate(dt.getDate() + i); opts.push(fmtDay(dt)); }
+        if (s.fpDue && s.fpDue !== 'no date' && !opts.includes(s.fpDue)) opts.unshift(s.fpDue);
+        return opts;
+      })(),
+      setFpDue: (e) => this.setState({ fpDue: e.target.value }),
+      fpCancel: () => this.setState({ fpKey: null }),
+      fpSave: () => {
+        const k = s.fpKey;
+        if (!k || !s.fpT.trim()) return;
+        const srcW = s.fpSrcWk, dstW = parseInt(String(s.fpWk).replace('Week ', '')) || srcW;
+        const due = s.fpDue === 'no date' ? '' : s.fpDue, title = s.fpT.trim();
+        const isCustom = k.charAt(0) !== 'w';
+        if (dstW === srcW) {
+          this.save({ edits: Object.assign({}, s.edits, { [k]: Object.assign({}, s.edits[k], { t: title, due }) }), fpKey: null });
+          return;
+        }
+        let base;
+        if (isCustom) base = (s.custom[srcW] || []).find(c => c.id === k) || { ws: 'GENERAL', o: 'Unassigned' };
+        else { const src = this.PLAN.find(p => p.n === srcW); base = src.items[parseInt(k.split('-')[1])] || { ws: 'GENERAL', o: 'Unassigned' }; }
+        const merged = Object.assign({ ws: base.ws, o: base.o }, s.edits[k] || {});
+        const newId = isCustom ? k : 't' + Date.now();
+        const customCopy = Object.assign({}, s.custom);
+        customCopy[dstW] = (customCopy[dstW] || []).concat([{ id: newId, t: title, ws: merged.ws, o: merged.o, due }]);
+        if (isCustom) customCopy[srcW] = (customCopy[srcW] || []).filter(c => c.id !== k);
+        const patch = { custom: customCopy, fpKey: null };
+        if (!isCustom) {
+          patch.hidden = Object.assign({}, s.hidden, { [k]: true });
+          if (s.checked[k]) patch.checked = Object.assign({}, s.checked, { [newId]: true });
+        } else if (s.edits[k]) {
+          patch.edits = Object.assign({}, s.edits, { [k]: Object.assign({}, s.edits[k], { t: title, due }) });
+        }
+        this.save(patch);
+      },
+      dueOpts,
+      editT: s.editT, editD: s.editD, editW: s.editW, editO: s.editO, editDue: s.editDue,
+      editX: s.editX, editXRows: Math.max(3, (s.editX || '').split('\n').length + 1),
+      setEditX: (e) => this.setState({ editX: e.target.value }),
+      setEditDue: (e) => this.setState({ editDue: e.target.value }),
+      setEditT: (e) => this.setState({ editT: e.target.value }),
+      setEditD: (e) => this.setState({ editD: e.target.value }),
+      setEditW: (e) => this.setState({ editW: e.target.value }),
+      setEditO: (e) => this.setState({ editO: e.target.value }),
+      cancelEdit: () => this.setState({ editingKey: null }),
+      saveEdit: () => {
+        const k = s.editingKey;
+        if (!k || !s.editT.trim()) return;
+        const patch = { t: s.editT.trim(), d: s.editD.trim(), ws: (s.editW.trim() || 'GENERAL').toUpperCase(), o: s.editO.trim() || 'Unassigned', due: s.editDue.trim(), x: s.editX.split('\n').map(l => l.trim()).filter(Boolean) };
+        this.save({ edits: Object.assign({}, s.edits, { [k]: patch }), editingKey: null });
+      },
+      ntT: this.ntT, ntW: this.ntW, ntO: this.ntO, ntDue: this.ntDue,
+      addTask: () => {
+        const t = this.ntT.current, w = this.ntW.current, o = this.ntO.current, du = this.ntDue.current;
+        if (!t.value.trim()) return;
+        const nt = { id: 't' + Date.now(), t: t.value.trim(), ws: (w.value.trim() || 'GENERAL').toUpperCase(), o: o.value.trim() || 'Unassigned', due: du.value.trim() };
+        t.value = w.value = o.value = du.value = '';
+        const list = (s.custom[week.n] || []).concat([nt]);
+        this.save({ custom: Object.assign({}, s.custom, { [week.n]: list }) });
+      },
+      blockerCount: blockers.length + (blockers.length === 1 ? ' item' : ' items'),
+      blockers: blockers.map(b => ({
+        title: b.title, needs: b.needs, meta: b.meta,
+        clear: () => this.save({ blockers: blockers.filter(x => x.id !== b.id) })
+      })),
+      addBlocker: () => {
+        const t = this.nbT.current, n = this.nbN.current, o = this.nbO.current;
+        if (!t.value.trim()) return;
+        const nb = { id: 'b' + Date.now(), title: t.value.trim(), needs: n.value.trim() || 'Needs: define the unblock.', meta: 'ADDED ' + now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase() + ' \u00b7 ' + (o.value.trim() || 'Unassigned') };
+        t.value = n.value = o.value = '';
+        this.save({ blockers: blockers.concat([nb]) });
+      },
+      decisionCount: decisions.length + ' open',
+      decisions: decisions.map(d => {
+        const full = d.desc || '', open = !!s.expanded['dec-' + d.id];
+        const short = full.length > 100 ? full.slice(0, full.lastIndexOf(' ', 100)) + '\u2026' : full;
+        return {
+        title: d.title, meta: d.meta,
+        hasDesc: !!full, desc: open ? full : short,
+        moreLabel: full.length > 100 ? (open ? 'less' : 'more') : '',
+        toggleExpand: () => this.setState({ expanded: Object.assign({}, s.expanded, { ['dec-' + d.id]: !open }) }),
+        idle: s.resolvingId !== d.id, resolving: s.resolvingId === d.id,
+        startResolve: () => this.setState({ resolvingId: d.id }),
+        confirmResolve: () => {
+          const out = this.resRef.current ? this.resRef.current.value.trim() : '';
+          if (!out) return;
+          this.save({
+            decisions: decisions.filter(x => x.id !== d.id), resolvingId: null,
+            log: [{ title: d.title, outcome: out, date: 'decided ' + now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toLowerCase() }].concat(s.log)
+          });
+        }
+      };}),
+      addDecision: () => {
+        const t = this.ndT.current, o = this.ndO.current, by = this.ndBy.current, dd = this.ndD.current;
+        if (!t.value.trim()) return;
+        const nd = { id: 'd' + Date.now(), title: t.value.trim(), desc: dd.value.trim(), meta: (o.value.trim() || 'RYAN + BRIAN').toUpperCase() + ' \u00b7 BY ' + (by.value.trim() || 'TBD').toUpperCase() };
+        t.value = o.value = by.value = dd.value = '';
+        this.save({ decisions: decisions.concat([nd]) });
+      },
+      hasLog: s.log.length > 0, log: s.log,
+      ...(() => {
+        const fm = (n) => '$' + (n >= 1000 ? (n / 1000).toFixed(n % 1000 ? 1 : 0) + 'K' : n);
+        const budget = s.budget ?? this.DEFAULT_BUDGET;
+        const committed = budget.filter(b => b.status === 'committed').reduce((a, b) => a + (+b.amt || 0), 0);
+        const paid = budget.filter(b => b.status === 'paid').reduce((a, b) => a + (+b.amt || 0), 0);
+        const remain = 40000 - committed - paid;
+        const stColor = { planned: 'oklch(0.62 0.015 75)', committed: gold, paid: green };
+        const investors = s.investors ?? [];
+        const ivColor = { 'to warm': 'oklch(0.62 0.015 75)', 'warming': gold, 'meeting set': 'oklch(0.76 0.08 265)', 'committed': green, 'passed': red };
+        return {
+          bgStatusOpts: ['planned', 'committed', 'paid'],
+          bgCommitted: fm(committed), bgPaid: fm(paid), bgRemain: fm(remain),
+          bgRemainColor: remain < 0 ? red : remain < 8000 ? gold : green,
+          bgRemainLabel: fm(remain) + ' remaining',
+          budgetRows: budget.map(b => ({
+            name: b.name, amt: b.amt, status: b.status, statusColor: stColor[b.status] || 'oklch(0.7 0.015 78)',
+            setAmt: (e) => this.save({ budget: budget.map(x => x.id === b.id ? Object.assign({}, x, { amt: parseInt(String(e.target.value).replace(/[^0-9]/g, '')) || 0 }) : x) }),
+            setStatus: (e) => this.save({ budget: budget.map(x => x.id === b.id ? Object.assign({}, x, { status: e.target.value }) : x) }),
+            remove: () => this.save({ budget: budget.filter(x => x.id !== b.id) })
+          })),
+          bgN: this.bgN, bgA: this.bgA,
+          addBudget: () => {
+            const n = this.bgN.current, a = this.bgA.current;
+            if (!n.value.trim()) return;
+            const nb = { id: 'bg' + Date.now(), name: n.value.trim(), amt: parseInt(String(a.value).replace(/[^0-9]/g, '')) || 0, status: 'planned' };
+            n.value = a.value = '';
+            this.save({ budget: budget.concat([nb]) });
+          },
+          invStatusOpts: ['to warm', 'warming', 'meeting set', 'committed', 'passed'],
+          invCount: investors.length + ' of ~20 \u00b7 ' + investors.filter(v => v.status === 'meeting set' || v.status === 'committed').length + ' in motion',
+          invRows: investors.map(v => ({
+            name: v.name, path: v.path || 'no intro path yet', status: v.status, statusColor: ivColor[v.status] || 'oklch(0.7 0.015 78)',
+            setStatus: (e) => this.save({ investors: investors.map(x => x.id === v.id ? Object.assign({}, x, { status: e.target.value }) : x) }),
+            remove: () => this.save({ investors: investors.filter(x => x.id !== v.id) })
+          })),
+          ivN: this.ivN, ivP: this.ivP,
+          addInv: () => {
+            const n = this.ivN.current, p = this.ivP.current;
+            if (!n.value.trim()) return;
+            const nv = { id: 'iv' + Date.now(), name: n.value.trim(), path: p.value.trim(), status: 'to warm' };
+            n.value = p.value = '';
+            this.save({ investors: investors.concat([nv]) });
+          }
+        };
+      })(),
+      nbT: this.nbT, nbN: this.nbN, nbO: this.nbO, ndT: this.ndT, ndO: this.ndO, ndBy: this.ndBy, ndD: this.ndD, resRef: this.resRef,
+      ...(() => {
+        const allTasks = [];
+        this.PLAN.forEach((w, i) => this.weekRows(w.n).forEach(r => allTasks.push(Object.assign({}, r, { wn: w.n, wi: i }))));
+        const WS_ALIAS = {
+          'MVP': ['PRODUCT', 'MVP'], 'Onboarding': ['ONBOARDING'], 'Map of Me': ['MAP OF ME', 'MAP'],
+          'Model': ['MODEL'], 'UI/UX': ['UI/UX', 'UIUX', 'DESIGN'], 'Privacy / security': ['PRIVACY', 'SECURITY'],
+          'Second brain': ['SECOND BRAIN', 'BRAIN'], 'Brand / name': ['BRAND', 'NAME'], 'Community': ['COMMUNITY'],
+          'Advisors': ['ADVISORS'], 'Deck': ['FUNDRAISE'], 'Data room / legal': ['FUNDRAISE'],
+          'Financial model': ['FUNDRAISE'], 'Investors': ['FUNDRAISE']
+        };
+        const matches = (r, name) => (WS_ALIAS[name] || [name.toUpperCase()]).includes(r.ws);
+        const yr = new Date().getFullYear();
+        const parseDue = (d) => { const dt = new Date(d + ', ' + yr); return isNaN(dt) ? null : dt.getTime(); };
+        const openName = s.wsOpen;
+        const rows = openName ? allTasks.filter(r => matches(r, openName)).sort((a, b) => {
+          const da = a.due ? parseDue(a.due) : null, db = b.due ? parseDue(b.due) : null;
+          if (da && db) return da - db;
+          if (da) return -1;
+          if (db) return 1;
+          return a.wi - b.wi;
+        }) : [];
+        return {
+          wsCards: this.WS.map(w => {
+            const cur = s.ws[w.name] || w.d;
+            const order = ['grey', 'green', 'yellow', 'red'];
+            const mine = allTasks.filter(r => matches(r, w.name));
+            return {
+              name: w.name, owner: w.owner, color: wsColor[cur],
+              count: mine.filter(r => s.checked[r.k]).length + '/' + mine.length,
+              cycle: (e) => { e.stopPropagation(); this.save({ ws: Object.assign({}, s.ws, { [w.name]: order[(order.indexOf(cur) + 1) % 4] }) }); },
+              openTasks: () => this.setState({ wsOpen: s.wsOpen === w.name ? null : w.name })
+            };
+          }),
+          wsTasksOpen: !!openName,
+          wsTasksTitle: openName ? openName + ' \u00b7 all tasks (' + rows.filter(r => s.checked[r.k]).length + '/' + rows.length + ' done)' : '',
+          closeWsTasks: () => this.setState({ wsOpen: null }),
+          wsTaskRows: rows.map(r => {
+            const isDone = !!s.checked[r.k];
+            return {
+              title: r.t, meta: 'W' + r.wn + ' \u00b7 ' + r.o,
+              due: r.due || '\u2014', dueColor: r.due ? gold : 'oklch(0.45 0.01 75)',
+              open: () => this.save({ week: r.wi, view: 'week', wsOpen: null }),
+              toggle: (e) => { e.stopPropagation(); this.save({ checked: Object.assign({}, s.checked, { [r.k]: !isDone }) }); },
+              check: isDone ? '\u2713' : '', boxBg: isDone ? green : 'transparent',
+              boxBorder: isDone ? green : 'oklch(0.4 0.015 75)',
+              deco: isDone ? 'line-through' : 'none', opacity: isDone ? 0.55 : 1
+            };
+          })
+        };
+      })(),
+      reviewOpen: s.reviewOpen,
+      openReview: () => this.setState({ reviewOpen: true, reviewIdx: 0 }),
+      closeReview: () => this.setState({ reviewOpen: false }),
+      reviewStep: (rIdx + 1) + ' of ' + this.REVIEW.length,
+      reviewTitle: this.REVIEW[rIdx].title, reviewPrompts: this.REVIEW[rIdx].prompts,
+      reviewNote: s.notes[rIdx] || '',
+      setReviewNote: (e) => this.save({ notes: Object.assign({}, s.notes, { [rIdx]: e.target.value }) }),
+      reviewPrev: () => this.setState({ reviewIdx: Math.max(0, rIdx - 1) }),
+      reviewNext: () => rIdx >= this.REVIEW.length - 1 ? this.setState({ reviewOpen: false }) : this.setState({ reviewIdx: rIdx + 1 }),
+      reviewNextLabel: rIdx >= this.REVIEW.length - 1 ? 'done' : 'next \u2192',
+      walkActive: walkOn,
+      startWalk: () => this.setState({ walkIdx: 0 }),
+      endWalk: () => this.setState({ walkIdx: null }),
+      walkStepLabel: walkOn ? (s.walkIdx + 1) + ' of ' + this.WALK.length : '',
+      walkTitle: walkOn ? walkCur.title : '',
+      walkCaption: walkOn ? walkCur.cap : '',
+      walkDots: walkOn ? this.WALK.map((_, i) => ({
+        bg: i === s.walkIdx ? 'oklch(0.75 0.12 85)' : i < s.walkIdx ? 'oklch(0.45 0.05 85)' : 'oklch(0.28 0.012 70)',
+        go: () => this.setState({ walkIdx: i })
+      })) : [],
+      walkPrev: () => this.walkStep(-1),
+      walkNext: () => this.walkStep(1),
+      walkNextLabel: walkOn && s.walkIdx >= this.WALK.length - 1 ? 'finish' : 'next \u2192'
+    };
+  }
+}
+</script>
+</body>
+</html>

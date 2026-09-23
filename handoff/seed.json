@@ -1,0 +1,1602 @@
+{
+  "plan": [
+    {
+      "n": 0,
+      "range": "AUG 31–SEP 11 · DONE",
+      "s": "2026-08-31",
+      "theme": "Carried forward from the 60-day plan. Mark completed everything he set out to; foundations and Second Brain architecture are locked.",
+      "items": [
+        {
+          "t": "Finalize 45-day objectives and definitions of success",
+          "ws": "PRODUCT",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Lock the MVP must-haves",
+          "ws": "PRODUCT",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Finalize first-community candidate list; define Wave 0 / 1 / 2",
+          "ws": "COMMUNITY",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Finalize investor archetypes; begin the ~20-person investor list",
+          "ws": "FUNDRAISE",
+          "o": "Ryan"
+        },
+        {
+          "t": "Establish the six fundraising readiness gates",
+          "ws": "FUNDRAISE",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Define explicit disproof criteria for the KOVA experience",
+          "ws": "PRODUCT",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "DECIDED: brand partner is Pineapple",
+          "ws": "BRAND",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Baseline evaluation of the current KOVA system",
+          "ws": "MODEL",
+          "o": "Mark"
+        },
+        {
+          "t": "Define the model evaluation framework",
+          "ws": "MODEL",
+          "o": "Mark"
+        },
+        {
+          "t": "Technical definition of core AI behaviors",
+          "ws": "MODEL",
+          "o": "Mark"
+        },
+        {
+          "t": "Establish memory / context architecture",
+          "ws": "MODEL",
+          "o": "Mark"
+        },
+        {
+          "t": "Define the Map of Me data + synthesis model",
+          "ws": "MODEL",
+          "o": "Mark"
+        },
+        {
+          "t": "Second Brain: finalize hard constraints",
+          "ws": "SECOND BRAIN",
+          "o": "Mark + Second Brain team"
+        },
+        {
+          "t": "Second Brain: build the evaluation corpus + question set",
+          "ws": "SECOND BRAIN",
+          "o": "Mark + Second Brain team"
+        },
+        {
+          "t": "Second Brain: choose the Month 1 architecture",
+          "ws": "SECOND BRAIN",
+          "o": "Mark + Second Brain team"
+        },
+        {
+          "t": "Oleg: first experiments — custom bot built and run",
+          "ws": "SECOND BRAIN",
+          "o": "Oleg"
+        }
+      ]
+    },
+    {
+      "n": 1,
+      "range": "SEP 14–18",
+      "s": "2026-09-14",
+      "theme": "Branding exercise + UI/UX groundwork. Ryan and Brian only — no partners start this week.",
+      "items": [
+        {
+          "t": "Send branding prompts to Claude and ChatGPT to seed the exercise",
+          "ws": "BRAND",
+          "o": "Ryan + Brian",
+          "due": "Sep 16"
+        },
+        {
+          "t": "Get Oleg the prioritized list of Second Brain use cases",
+          "ws": "SECOND BRAIN",
+          "o": "Mark",
+          "due": "Sep 16"
+        },
+        {
+          "t": "Oleg: begin building out the use cases",
+          "ws": "SECOND BRAIN",
+          "o": "Oleg",
+          "due": "Sep 17"
+        },
+        {
+          "t": "Ryan + Brian branding session — run our own branding exercise",
+          "ws": "BRAND",
+          "o": "Ryan + Brian",
+          "due": "Sep 18"
+        },
+        {
+          "t": "Thursday: first meeting with the ML Go team on AWS funding",
+          "ws": "AWS",
+          "o": "Ryan + Brian",
+          "due": "Sep 17"
+        },
+        {
+          "t": "Send Pineapple the overview of our branding work + the deck",
+          "ws": "BRAND",
+          "o": "Ryan",
+          "due": "Sep 18"
+        },
+        {
+          "t": "Brian: onboarding experience — hand off current state to Mark",
+          "ws": "ONBOARDING",
+          "o": "Brian",
+          "due": "Sep 18"
+        },
+        {
+          "t": "Ryan + Brian: wireframe the primary product",
+          "ws": "UI/UX",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Schedule next week: Tarek UI/UX session, Lizzie, Jeff",
+          "ws": "UI/UX",
+          "o": "Ryan",
+          "due": "Sep 18"
+        },
+        {
+          "t": "Confirm Pineapple kickoff for Mon Sep 21 or Tue Sep 22",
+          "ws": "BRAND",
+          "o": "Ryan",
+          "due": "Sep 18"
+        },
+        {
+          "t": "Brian meets Chuck — explore a formal advisor role",
+          "ws": "ADVISORS",
+          "o": "Brian",
+          "due": "Sep 16"
+        },
+        {
+          "t": "Finalize the corporate umbrella website",
+          "ws": "WEBSITE",
+          "o": "Ryan + Brian",
+          "due": "Sep 18"
+        },
+        {
+          "t": "User testing process: get a first draft going",
+          "ws": "TESTING",
+          "o": "Ryan + Brian",
+          "due": "Sep 18"
+        },
+        {
+          "t": "Review the budget for this plan",
+          "ws": "BUDGET",
+          "o": "Ryan + Brian",
+          "due": "Sep 18"
+        },
+        {
+          "t": "Evaluate other accelerators — for the connections, not the process",
+          "ws": "FUNDRAISE",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Set a standing weekly meeting with Tarek",
+          "ws": "PRIVACY",
+          "o": "Ryan",
+          "due": "Sep 18"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "range": "SEP 21–25",
+      "s": "2026-09-21",
+      "theme": "Partners start. Pineapple kickoff, Lizzie kicked off Monday, Ryan on the UI/UX first pass, wireframe finalized.",
+      "items": [
+        {
+          "t": "Pineapple brand kickoff call",
+          "ws": "BRAND",
+          "o": "Ryan + Brian + Pineapple",
+          "due": "Sep 22"
+        },
+        {
+          "t": "Lizzie kickoff call — walked her through what we are building",
+          "ws": "ONBOARDING",
+          "o": "Ryan + Brian",
+          "due": "Sep 21"
+        },
+        {
+          "t": "Jeff: early community — facilitators and early testers",
+          "ws": "COMMUNITY",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Tarek session on UI/UX",
+          "ws": "UI/UX",
+          "o": "Ryan + Brian + Tarek"
+        },
+        {
+          "t": "Updated cheat sheet: privacy, security and tech stack",
+          "ws": "PRIVACY",
+          "o": "Mark + Tarek",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Map of Me: detailed definition work begins",
+          "ws": "PRODUCT",
+          "o": "Ryan + Brian + Mark"
+        },
+        {
+          "t": "Finalize the primary product wireframe, incl. onboarding prototype",
+          "ws": "UI/UX",
+          "o": "Ryan + Brian",
+          "due": "Sep 25"
+        },
+        {
+          "t": "One-page MVP definition",
+          "ws": "PRODUCT",
+          "o": "Ryan + Brian + Tarek",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Get the corporate umbrella entity reinstated",
+          "ws": "LEGAL",
+          "o": "Sarah",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Engineering continues against the emerging UX architecture",
+          "ws": "PRODUCT",
+          "o": "Mark"
+        },
+        {
+          "t": "Advisor list: who we want and what role each plays",
+          "ws": "ADVISORS",
+          "o": "Ryan + Brian",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Decide whether we ask advisors to put money in",
+          "ws": "ADVISORS",
+          "o": "Ryan + Brian",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Content creator list: the vision-board partners, and who to approach first",
+          "ws": "PARTNERS",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Super node list: facilitators running retreats and workshops",
+          "ws": "PARTNERS",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "List the AI agents we might need",
+          "ws": "PRODUCT",
+          "o": "Mark + Oleg"
+        },
+        {
+          "t": "Jack builds the AWS funding deck and submits the request",
+          "ws": "AWS",
+          "o": "Ryan",
+          "due": "Sep 25"
+        },
+        {
+          "t": "User testing process: finalize v1 — a living document",
+          "ws": "TESTING",
+          "o": "Ryan + Brian",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Practitioner list beyond Lizzie and Jeff — seats and perspectives",
+          "ws": "PRACTITIONERS",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Socials: decide which platforms, what the presence looks like, get them up",
+          "ws": "SOCIAL",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Schedule and run the go-to-market strategy session",
+          "ws": "GTM",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Start the developer search — known candidate or lemon.io",
+          "ws": "HIRING",
+          "o": "Ryan"
+        },
+        {
+          "t": "Tarek + Mark: build out the privacy and security architecture",
+          "ws": "PRIVACY",
+          "o": "Mark + Tarek"
+        },
+        {
+          "t": "Schedule the demo and feedback session with Ryan Foust for the week of Sep 28",
+          "ws": "PRIVACY",
+          "o": "Ryan",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Send Lizzie the Onboarding PDF deck",
+          "ws": "ONBOARDING",
+          "o": "Ryan + Brian",
+          "due": "Sep 24"
+        },
+        {
+          "t": "Set a meeting with Jeff — review where onboarding stands, walk him through the onboarding experience PDF",
+          "ws": "ONBOARDING",
+          "o": "Ryan",
+          "due": "Sep 25"
+        },
+        {
+          "t": "Ryan: UI/UX first pass",
+          "ws": "UI/UX",
+          "o": "Ryan",
+          "due": "Sep 25"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "range": "SEP 28–OCT 2",
+      "s": "2026-09-28",
+      "theme": "UI/UX first pass reviewed by Tarek, Brian, then Mark. Jenni onboards to help finalize. Lizzie starts onboarding work. Oleg wires the bot to our tools.",
+      "items": [
+        {
+          "t": "Jenni onboards — starts assisting with finalizing UI/UX",
+          "ws": "UI/UX",
+          "o": "Jenni + Ryan",
+          "due": "Sep 30"
+        },
+        {
+          "t": "Present UI/UX first pass to Tarek + Brian — collect feedback",
+          "ws": "UI/UX",
+          "o": "Ryan",
+          "due": "Sep 28"
+        },
+        {
+          "t": "Early-community invitation: design and finalize — one-week project",
+          "ws": "COMMUNITY",
+          "o": "Brian",
+          "due": "Oct 2"
+        },
+        {
+          "t": "Map of Me prototype: flow and what we serve up",
+          "ws": "PRODUCT",
+          "o": "Ryan + Brian + Mark",
+          "due": "Oct 2"
+        },
+        {
+          "t": "Decide and engage the fundraising attorney",
+          "ws": "LEGAL",
+          "o": "Ryan",
+          "due": "Oct 2"
+        },
+        {
+          "t": "Lizzie: onboarding work underway",
+          "ws": "ONBOARDING",
+          "o": "Lizzie"
+        },
+        {
+          "t": "Capture the facilitation pattern from Lizzie's session into onboarding",
+          "ws": "ONBOARDING",
+          "o": "Brian"
+        },
+        {
+          "t": "Pineapple: positioning, narrative, naming territories",
+          "ws": "BRAND",
+          "o": "Pineapple"
+        },
+        {
+          "t": "Oleg: design doc — foundational knowledge layer for the bot",
+          "ws": "SECOND BRAIN",
+          "o": "Oleg",
+          "due": "Oct 2"
+        },
+        {
+          "t": "Developer: interviews and selection",
+          "ws": "HIRING",
+          "o": "Ryan",
+          "due": "Oct 2"
+        },
+        {
+          "t": "AWS decision expected back",
+          "ws": "AWS",
+          "o": "Ryan"
+        },
+        {
+          "t": "Demo to Ryan Foust and his co-founder — product plus privacy/security feedback",
+          "ws": "PRIVACY",
+          "o": "Ryan + Brian + Mark + Tarek"
+        },
+        {
+          "t": "Present UI/UX first pass to Mark",
+          "ws": "UI/UX",
+          "o": "Ryan",
+          "due": "Sep 29"
+        },
+        {
+          "t": "Oleg: hook the bot up to Granola, Notion, Claude, Gmail, Google Calendar and other platforms",
+          "ws": "SECOND BRAIN",
+          "o": "Oleg",
+          "due": "Sep 30"
+        },
+        {
+          "t": "Oleg: meeting planner agent — easy",
+          "ws": "SECOND BRAIN",
+          "o": "Oleg",
+          "due": "Oct 2"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "range": "OCT 5–9",
+      "s": "2026-10-05",
+      "theme": "Jenni and Ryan finalize UI/UX, week two. Oleg starts the medium Second Brain use cases. Fundraise scaffolding starts in parallel.",
+      "items": [
+        {
+          "t": "Jenni + Ryan: UI/UX finalization, week two of two",
+          "ws": "UI/UX",
+          "o": "Jenni + Ryan"
+        },
+        {
+          "t": "Fundraising checklist + data room skeleton",
+          "ws": "FUNDRAISE",
+          "o": "Ryan",
+          "due": "Oct 9"
+        },
+        {
+          "t": "Investor list prioritized — who we approach and in what order",
+          "ws": "INVESTORS",
+          "o": "Ryan",
+          "due": "Oct 9"
+        },
+        {
+          "t": "Jenni: core MVP flows resolved and handed to build",
+          "ws": "UI/UX",
+          "o": "Jenni"
+        },
+        {
+          "t": "Privacy / security review",
+          "ws": "PRIVACY",
+          "o": "Tarek"
+        },
+        {
+          "t": "Pineapple: core story and naming shortlist",
+          "ws": "BRAND",
+          "o": "Pineapple"
+        },
+        {
+          "t": "Model: improvement from surfaced failures",
+          "ws": "MODEL",
+          "o": "Mark"
+        },
+        {
+          "t": "Developer in place, onboarded, ready for handoff",
+          "ws": "HIRING",
+          "o": "Ryan",
+          "due": "Oct 9"
+        },
+        {
+          "t": "AWS build kicks off — two to three month engagement",
+          "ws": "AWS",
+          "o": "Ryan + Mark"
+        },
+        {
+          "t": "Marketing website: simple, but nailed down",
+          "ws": "WEBSITE",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Lizzie walks Brian through the onboarding experience she created",
+          "ws": "ONBOARDING",
+          "o": "Brian + Lizzie",
+          "due": "Oct 9"
+        },
+        {
+          "t": "Oleg: medium use cases — alignment/philosophy, on-track, meeting synthesis, open-thread research, Linear follow-up",
+          "ws": "SECOND BRAIN",
+          "o": "Oleg"
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "range": "OCT 12–16",
+      "s": "2026-10-12",
+      "theme": "UI/UX finalized and production ready. Ryan starts the Claude Code build from the finished designs. Map of Me is the last thing designed.",
+      "items": [
+        {
+          "t": "UI/UX production ready",
+          "ws": "UI/UX",
+          "o": "Jenni + Ryan",
+          "due": "Oct 16"
+        },
+        {
+          "t": "Map of Me: high-fidelity designs",
+          "ws": "UI/UX",
+          "o": "Jenni",
+          "due": "Oct 16"
+        },
+        {
+          "t": "Ryan + Claude Code: initial build starts as the final designs land",
+          "ws": "BUILD",
+          "o": "Ryan",
+          "due": "Oct 16"
+        },
+        {
+          "t": "Deck done — Pineapple’s four weeks land here",
+          "ws": "DECK",
+          "o": "Ryan + Brian",
+          "due": "Oct 16"
+        },
+        {
+          "t": "Pineapple: name or finalists, identity direction",
+          "ws": "BRAND",
+          "o": "Pineapple"
+        },
+        {
+          "t": "Data room populated",
+          "ws": "FUNDRAISE",
+          "o": "Ryan"
+        },
+        {
+          "t": "Hand off the Claude Code build to the developer",
+          "ws": "HIRING",
+          "o": "Ryan",
+          "due": "Oct 16"
+        },
+        {
+          "t": "Use of funds model for the raise — lives in the data room",
+          "ws": "BUDGET",
+          "o": "Ryan + Brian",
+          "due": "Oct 16"
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "range": "OCT 19–23",
+      "s": "2026-10-19",
+      "theme": "Initial build lands. Oleg starts his audit. Everything else in place before the raise opens.",
+      "items": [
+        {
+          "t": "Ryan + Claude Code: initial build complete",
+          "ws": "BUILD",
+          "o": "Ryan",
+          "due": "Oct 23"
+        },
+        {
+          "t": "Fundraising docs solid",
+          "ws": "LEGAL",
+          "o": "Ryan",
+          "due": "Oct 23"
+        },
+        {
+          "t": "Company name settled and entity set up",
+          "ws": "LEGAL",
+          "o": "Ryan + Brian",
+          "due": "Oct 23"
+        },
+        {
+          "t": "Data room set up and reviewed",
+          "ws": "FUNDRAISE",
+          "o": "Ryan",
+          "due": "Oct 23"
+        },
+        {
+          "t": "Marketing website live",
+          "ws": "WEBSITE",
+          "o": "Ryan + Brian",
+          "due": "Oct 23"
+        },
+        {
+          "t": "Socials live with an initial presence, LinkedIn included",
+          "ws": "SOCIAL",
+          "o": "Ryan + Brian",
+          "due": "Oct 23"
+        },
+        {
+          "t": "Friendly pitches #1–3",
+          "ws": "FUNDRAISE",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Story test with trusted outsiders: “What is KOVA?”",
+          "ws": "FUNDRAISE",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Oleg: audit the build — fix, improve, add what is missing (two weeks)",
+          "ws": "BUILD",
+          "o": "Oleg",
+          "due": "Nov 6"
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "range": "OCT 26–30",
+      "s": "2026-10-26",
+      "theme": "Open the raise. Day 45 is Wednesday Oct 28. Oleg’s audit runs in parallel; the app launch follows it.",
+      "items": [
+        {
+          "t": "Core community preview — first look at the build while Oleg audits",
+          "ws": "COMMUNITY",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "Capture early feedback to carry into investor calls",
+          "ws": "COMMUNITY",
+          "o": "Ryan + Brian"
+        },
+        {
+          "t": "FIRST PITCH — Wednesday Oct 28",
+          "ws": "FUNDRAISE",
+          "o": "Ryan + Brian",
+          "due": "Oct 28"
+        },
+        {
+          "t": "Open the raise — begin outreach down the prioritized list",
+          "ws": "INVESTORS",
+          "o": "Ryan",
+          "due": "Oct 28"
+        },
+        {
+          "t": "Founder alignment: Ryan + Brian answer the venture case together",
+          "ws": "FUNDRAISE",
+          "o": "Ryan + Brian",
+          "due": "Oct 30"
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "range": "NOV 2–6",
+      "s": "2026-11-02",
+      "theme": "Oleg’s audit clears. Launch the first version to the core community.",
+      "items": [
+        {
+          "t": "Oleg: audit complete — fixes, improvements and additions landed",
+          "ws": "BUILD",
+          "o": "Oleg",
+          "due": "Nov 6"
+        },
+        {
+          "t": "Launch the first version to the core community",
+          "ws": "COMMUNITY",
+          "o": "Ryan + Brian + Oleg",
+          "due": "Nov 6"
+        },
+        {
+          "t": "Capture early feedback to carry into investor calls",
+          "ws": "COMMUNITY",
+          "o": "Ryan + Brian"
+        }
+      ]
+    }
+  ],
+  "taskInfo": {
+    "w0-0": {
+      "d": "",
+      "x": []
+    },
+    "w0-1": {
+      "d": "",
+      "x": []
+    },
+    "w0-2": {
+      "d": "",
+      "x": []
+    },
+    "w0-3": {
+      "d": "",
+      "x": []
+    },
+    "w0-4": {
+      "d": "",
+      "x": []
+    },
+    "w0-5": {
+      "d": "",
+      "x": []
+    },
+    "w0-6": {
+      "d": "Settled before the sprint.",
+      "x": [
+        "Pineapple is the brand partner. Kickoff call targeted for Mon Sep 21 or Tue Sep 22."
+      ]
+    },
+    "w0-7": {
+      "d": "",
+      "x": []
+    },
+    "w0-8": {
+      "d": "",
+      "x": []
+    },
+    "w0-9": {
+      "d": "",
+      "x": []
+    },
+    "w0-10": {
+      "d": "",
+      "x": []
+    },
+    "w0-11": {
+      "d": "",
+      "x": []
+    },
+    "w0-12": {
+      "d": "",
+      "x": []
+    },
+    "w0-13": {
+      "d": "",
+      "x": []
+    },
+    "w0-14": {
+      "d": "",
+      "x": []
+    },
+    "w0-15": {
+      "d": "The experiment started last week.",
+      "x": [
+        "Oleg ran the first experiments and built a custom bot. Next step is building out the individual use cases."
+      ]
+    },
+    "w1-0": {
+      "d": "Seed the branding conversation before we sit down.",
+      "x": [
+        "Send prompts to both Claude and ChatGPT so the exercise starts from questions that push us deeper on the brand rather than a blank page."
+      ]
+    },
+    "w1-1": {
+      "d": "End of day Tuesday.",
+      "x": [
+        "Oleg needs the updated list of Second Brain use cases, prioritized. Mark owns getting it to him."
+      ]
+    },
+    "w1-2": {
+      "d": "Starting Thursday.",
+      "x": [
+        "With the prioritized list in hand, Oleg moves from the custom-bot experiment to building out the different use cases."
+      ]
+    },
+    "w1-3": {
+      "d": "Wednesday, Thursday or Friday — Ryan and Brian only.",
+      "x": [
+        "Run our own branding exercise using the Claude and ChatGPT prompts as input. This is the one must-do for the two of us this week."
+      ]
+    },
+    "w1-4": {
+      "d": "First conversation — Jack is excited.",
+      "x": [
+        "AWS funding would support building out KOVA privacy, security and safety features. Jack puts the request deck together by the end of next week; AWS should come back inside a week or two; the two-to-three month build starts about a week after that. Being able to tell investors AWS is funding $60–75K and bringing their expertise reads almost like a lead investor."
+      ]
+    },
+    "w1-5": {
+      "d": "Get them up the curve before kickoff.",
+      "x": [
+        "Send the Pineapple team everything we have created around branding and the deck so kickoff does not get spent catching them up."
+      ]
+    },
+    "w1-6": {
+      "d": "Brian's focus this week.",
+      "x": [
+        "Brian works the onboarding experience and passes the current state to Mark by Friday. The overview gets shared with Lizzie and Jeff next week."
+      ]
+    },
+    "w1-7": {
+      "d": "Both of us on UI/UX this week.",
+      "x": [
+        "Wireframe the primary product this week and next; finalize end of next week, including the onboarding prototype."
+      ]
+    },
+    "w1-8": {
+      "d": "Book it now so next week runs.",
+      "x": [
+        "Tarek UI/UX session, Lizzie and Jeff all need dates. Dates still TBD as of Monday."
+      ]
+    },
+    "w1-9": {
+      "d": "Monday or Tuesday next week.",
+      "x": [
+        "Confirm the Pineapple kickoff call for Sep 21 or 22."
+      ]
+    },
+    "w1-10": {
+      "d": "Brian takes the conversation tomorrow.",
+      "x": [
+        "Chuck — the Procter & Gamble and Nabisco operator, angel investing in healthcare. Adviser energy: down the field, looking over our shoulder at how we are positioning. His wisdom may be worth more than his money, and his network is powerful. If he is really into it he will find a way to put money in. It does not have to be Chuck, but somebody like a Chuck."
+      ]
+    },
+    "w1-11": {
+      "d": "Ryan has work to share with Brian.",
+      "x": [
+        "The corporate umbrella website needs to be finalized. The marketing website comes later, once the product is signed on."
+      ]
+    },
+    "w1-12": {
+      "d": "This week or next.",
+      "x": [
+        "Get creative about how we capture what the first 20–50 community members think of the experience: how to make the best use of their time, how to give them value, and how to get value back. First draft this week."
+      ]
+    },
+    "w1-13": {
+      "d": "In the next three or four working days.",
+      "x": [
+        "Ryan and Brian review the budget for this plan — by Tuesday Sep 22 at the latest."
+      ]
+    },
+    "w1-14": {
+      "d": "Connections, not curriculum.",
+      "x": [
+        "Worth evaluating whether any accelerator would form the right relationships for us, independent of what the program itself teaches."
+      ]
+    },
+    "w1-15": {
+      "d": "Every week, not ad hoc.",
+      "x": [
+        "Tarek should be on a standing weekly cadence with us."
+      ]
+    },
+    "w2-0": {
+      "d": "The brand engagement formally starts.",
+      "x": [
+        "Kickoff with Pineapple on Monday or Tuesday, with our branding work and deck already in their hands."
+      ]
+    },
+    "w2-1": {
+      "d": "Done — Monday Sep 21.",
+      "x": [
+        "Lizzie is kicked off. We owe her the Onboarding PDF deck next; she starts her onboarding work once she has it."
+      ]
+    },
+    "w2-2": {
+      "d": "Separate from onboarding.",
+      "x": [
+        "Beyond onboarding, talk to Jeff about the early community on both the practitioner/facilitator side and finding early testers. Jeff is a potential advisor too."
+      ]
+    },
+    "w2-3": {
+      "d": "Second Tarek session.",
+      "x": [
+        "Continue the UI/UX work with Tarek before Jenni is engaged."
+      ]
+    },
+    "w2-4": {
+      "d": "So we can answer the questions in the room.",
+      "x": [
+        "Ryan and Brian need strong talking points and high-level answers on privacy, security and the tech stack when they talk to stakeholders."
+      ]
+    },
+    "w2-5": {
+      "d": "Know the flow, not the pixels.",
+      "x": [
+        "Detailed Map of Me work starts this week. Goal is a working prototype of the flow by Oct 2; high-fidelity designs wait until the week of Oct 12."
+      ]
+    },
+    "w2-6": {
+      "d": "Locked by Friday.",
+      "x": [
+        "The primary product wireframe, including the onboarding prototype, is finalized end of this week so Jenni has something stable to polish."
+      ]
+    },
+    "w2-7": {
+      "d": "End of next week, one page.",
+      "x": [
+        "Comes out of the UI/UX work Ryan, Brian and Tarek are doing together."
+      ]
+    },
+    "w2-8": {
+      "d": "Sarah is handling it.",
+      "x": [
+        "First goal is reinstating the existing entity as the corporate umbrella by next week. Depending on how intensive the process is we may go with a different corporate umbrella name. Entity type — LLC, C Corp, B Corp — still has to be settled before the raise opens."
+      ]
+    },
+    "w2-9": {
+      "d": "",
+      "x": []
+    },
+    "w2-10": {
+      "d": "Names and roles, not just names.",
+      "x": [
+        "Who we would want on board as advisors and what role each one plays. People who have been there and done that help us directly, and investors value knowing that kind of thinking is around the table."
+      ]
+    },
+    "w2-11": {
+      "d": "Learned this the hard way before.",
+      "x": [
+        "A lot of advisors sign up and then are too busy to do anything. We eventually got there with the previous venture by asking for money. Decide the ask before the outreach starts."
+      ]
+    },
+    "w2-12": {
+      "d": "Ideal vision-board list first, then who to approach early.",
+      "x": [
+        "Content creators in the space we may want to partner with. Some of them may be advisors with upside in what we are doing."
+      ]
+    },
+    "w2-13": {
+      "d": "They bring their own communities.",
+      "x": [
+        "Facilitators who run retreats and workshops can bring participants in ahead of the retreat, and the product can integrate the experience back into real life afterward. Who else belongs on the list, and who can be approached."
+      ]
+    },
+    "w2-14": {
+      "d": "Tarek raised it today.",
+      "x": [
+        "List the AI agents we might need. Where it lands depends on what the list turns out to be."
+      ]
+    },
+    "w2-15": {
+      "d": "End of next week for the request.",
+      "x": [
+        "Jack assembles the deck for AWS to request funding. Expect a response inside a week or two."
+      ]
+    },
+    "w2-16": {
+      "d": "A living document, not a finished one.",
+      "x": [
+        "Finalize v1 of the user testing process so the early community work can start against it; it keeps evolving after that."
+      ]
+    },
+    "w2-17": {
+      "d": "Which seats, and what each perspective brings.",
+      "x": [
+        "Beyond Lizzie and Jeff — get clear on who sits in which seat, what perspective each brings, and which perspectives we still need to fill."
+      ]
+    },
+    "w2-18": {
+      "d": "Decide, then stand them up.",
+      "x": [
+        "Which platforms we want, what the presence looks like, and get them live. LinkedIn is the likely first one."
+      ]
+    },
+    "w2-19": {
+      "d": "Beyond the first 20–40 core users.",
+      "x": [
+        "Schedule dedicated time to talk through go-to-market: the initial core community, and then what growth looks like after them."
+      ]
+    },
+    "w2-20": {
+      "d": "Needs to be in place before the October handoff.",
+      "x": [
+        "Probably part-time, to take the Claude Code build the rest of the way. Either someone we already know or someone through lemon.io."
+      ]
+    },
+    "w2-21": {
+      "d": "Ongoing work, the two of them together.",
+      "x": [
+        "Mark and Tarek build out more of the privacy and security architecture."
+      ]
+    },
+    "w2-22": {
+      "d": "Not next week — the week after.",
+      "x": [
+        "Get the session on the calendar for the week of Sep 28: Ryan Foust and his co-founder, plus Mark, Tarek, Ryan and Brian."
+      ]
+    },
+    "w3-0": {
+      "d": "About two weeks from here.",
+      "x": [
+        "Jenni comes in after the Mark review to help finalize the designs. Two weeks puts finalized UI/UX around Oct 14–16."
+      ]
+    },
+    "w3-1": {
+      "d": "Monday.",
+      "x": [
+        "First review of the first pass. Feedback folds in before the Mark presentation Tuesday."
+      ]
+    },
+    "w3-2": {
+      "d": "Brian's idea, scoped to a week.",
+      "x": [
+        "Design and finalize the invitation for our early community members."
+      ]
+    },
+    "w3-3": {
+      "d": "Flow and content, not high fidelity.",
+      "x": [
+        "By Oct 2 we should generally know what Map of Me looks like and what it serves up. High-fidelity designs come the week of Oct 12."
+      ]
+    },
+    "w3-4": {
+      "d": "Both attorneys have been spoken to.",
+      "x": [
+        "Decide which attorney we engage for the fundraising docs and engage them."
+      ]
+    },
+    "w3-5": {
+      "d": "Starts once she has the PDF deck.",
+      "x": [
+        "Lizzie builds her onboarding experience against the deck we sent Sep 24."
+      ]
+    },
+    "w3-6": {
+      "d": "Turn watching into product.",
+      "x": [
+        "Translate the pauses, questions, follow-ups and session-ending judgment observed in Lizzie's session into the onboarding orchestration."
+      ]
+    },
+    "w3-7": {
+      "d": "",
+      "x": []
+    },
+    "w3-8": {
+      "d": "Written after the connectors are hooked up.",
+      "x": [
+        "How the knowledge layer is built given the added connectors.",
+        "MCP layer for the integrations — what that pattern looks like here, fleshed out.",
+        "When to lean on existing harnesses (LangChain DeepAgents, AWS Bedrock AgentCore harness) instead of hand-rolling an agent loop. Direction: a general-purpose agent layer that picks its own tools and does web search, not a handmade QA bot."
+      ]
+    },
+    "w3-9": {
+      "d": "Pick the person.",
+      "x": [
+        "Interviews and selection so they are onboarded before the October handoff."
+      ]
+    },
+    "w3-10": {
+      "d": "A week or two after the request.",
+      "x": [
+        "AWS should come back with a yes; the build starts about a week after that."
+      ]
+    },
+    "w3-11": {
+      "d": "Two things at once: product and architecture.",
+      "x": [
+        "Demo the product, or a version of it, then take their feedback on both the product itself and the security and privacy architecture."
+      ]
+    },
+    "w4-0": {
+      "d": "Coding waits for these.",
+      "x": [
+        "Designs finalize this week and next; Ryan starts the Claude Code build once they are done."
+      ]
+    },
+    "w4-1": {
+      "d": "",
+      "x": []
+    },
+    "w4-2": {
+      "d": "Needed before the raise opens.",
+      "x": [
+        "The list of investors we want to approach, in priority order."
+      ]
+    },
+    "w4-3": {
+      "d": "",
+      "x": []
+    },
+    "w4-4": {
+      "d": "",
+      "x": []
+    },
+    "w4-5": {
+      "d": "",
+      "x": []
+    },
+    "w4-6": {
+      "d": "",
+      "x": []
+    },
+    "w4-7": {
+      "d": "Before the handoff, not during it.",
+      "x": [
+        "The developer should be onboarded and productive by the time the Claude Code designs are ready to hand off in October."
+      ]
+    },
+    "w4-8": {
+      "d": "Two to three months with AWS.",
+      "x": [
+        "The engagement starts about a week after the funding decision comes back."
+      ]
+    },
+    "w4-9": {
+      "d": "Simple is fine.",
+      "x": [
+        "Once the product is signed on, the marketing website just needs to be nailed down."
+      ]
+    },
+    "w4-10": {
+      "d": "End of her second week.",
+      "x": [
+        "Lizzie starts around Wednesday Sep 23, so this lands about two weeks later. The facilitation is the part we cannot read off a document: where she pauses, what she asks, how she follows up, and how she decides a session is complete and should wrap until next time."
+      ]
+    },
+    "w5-0": {
+      "d": "The gate before code.",
+      "x": [
+        "Jenni’s two weeks from Sep 30 land finalized, production-ready UI/UX by Fri Oct 16."
+      ]
+    },
+    "w5-1": {
+      "d": "Last thing we design.",
+      "x": [
+        "High-fidelity Map of Me designs land after the flow has been proven by the Oct 2 prototype."
+      ]
+    },
+    "w5-2": {
+      "d": "About a week of coding.",
+      "x": [
+        "Once designs are finalized Ryan works with Claude Code on the initial build. Roughly one week, then Oleg audits."
+      ]
+    },
+    "w5-3": {
+      "d": "Four weeks from the Sep 21 kickoff.",
+      "x": [
+        "Pineapple asked for four weeks from their start. Starting next week puts the completed deck at the end of the week of Oct 16."
+      ]
+    },
+    "w5-4": {
+      "d": "",
+      "x": []
+    },
+    "w5-5": {
+      "d": "",
+      "x": []
+    },
+    "w5-6": {
+      "d": "The handoff.",
+      "x": [
+        "Ryan hands the Claude Code build to the developer to take the rest of the way."
+      ]
+    },
+    "w5-7": {
+      "d": "Goes in the data room.",
+      "x": [
+        "A use-of-funds model for the raise, built before investor conversations start."
+      ]
+    },
+    "w6-0": {
+      "d": "End of the coding week.",
+      "x": [
+        "Hands to Oleg for audit on Monday."
+      ]
+    },
+    "w6-1": {
+      "d": "",
+      "x": []
+    },
+    "w6-2": {
+      "d": "Name and entity both have to be settled.",
+      "x": [
+        "Solid on the company name, with the entity set up, before we start investor conversations."
+      ]
+    },
+    "w6-3": {
+      "d": "",
+      "x": []
+    },
+    "w6-4": {
+      "d": "",
+      "x": []
+    },
+    "w6-5": {
+      "d": "",
+      "x": []
+    },
+    "w6-6": {
+      "d": "Live before the raise opens.",
+      "x": [
+        "The marketing website is up."
+      ]
+    },
+    "w6-7": {
+      "d": "Presence in place before outreach.",
+      "x": [
+        "Socials live, LinkedIn included."
+      ]
+    },
+    "w7-0": {
+      "d": "Preview, not launch.",
+      "x": [
+        "With Oleg’s two-week audit running Oct 26 – Nov 6, the first version launches the week of Nov 2. Core community can preview the build before then."
+      ]
+    },
+    "w7-1": {
+      "d": "",
+      "x": []
+    },
+    "w7-2": {
+      "d": "Day 45.",
+      "x": [
+        "The first pitch. Everything in the 45 days points here."
+      ]
+    },
+    "w7-3": {
+      "d": "The raise opens.",
+      "x": [
+        "Outreach begins down the prioritized list, with the deck, data room, docs, name and entity already in place."
+      ]
+    },
+    "w7-4": {
+      "d": "",
+      "x": []
+    },
+    "w2-23": {
+      "d": "EOD Thursday Sep 24.",
+      "x": [
+        "What we owe Lizzie after Monday’s kickoff. Her onboarding work starts once it is in her hands."
+      ]
+    },
+    "w2-24": {
+      "d": "Not yet scheduled.",
+      "x": [
+        "Jeff has not had his kickoff. Get a date on the calendar; the PDF we made for Lizzie is the walkthrough material."
+      ]
+    },
+    "w2-25": {
+      "d": "Ready to present Monday.",
+      "x": [
+        "First pass complete by end of week so it can go to Tarek and Brian on Mon Sep 28, then to Mark on Tue Sep 29."
+      ]
+    },
+    "w3-12": {
+      "d": "Tuesday.",
+      "x": [
+        "Second review, with Tarek and Brian’s feedback already folded in. Jenni starts after this."
+      ]
+    },
+    "w3-13": {
+      "d": "Mid-week.",
+      "x": [
+        "Connects the bot Oleg built last week to the tools we actually work in. Design doc and use cases follow once this is in."
+      ]
+    },
+    "w3-14": {
+      "d": "About an afternoon.",
+      "x": [
+        "Take the existing agent and run it on a schedule or trigger. First of the use cases, easy first."
+      ]
+    },
+    "w4-11": {
+      "d": "Extra plug-ins, not new engineering.",
+      "x": [
+        "Alignment / philosophy agent: recent meetings, Slack and product work against our tenets.",
+        "On-track agent: goals and priorities vs. what we are building; connects to the Notion Kova Plan.",
+        "Meeting synthesis agent: tag the bot in Slack for weekly themes and cross-meeting comparisons.",
+        "Open-thread research agent: research questions left open in a meeting, come back with a short report.",
+        "Linear / follow-up agent: nudge on issues sitting two weeks or more.",
+        "Hard tier (safety, conversation QA, app QA, feedback agents) needs live user data and a privacy/safety discussion first — not in this sprint."
+      ]
+    },
+    "w6-8": {
+      "d": "Oleg probably needs two weeks.",
+      "x": [
+        "Audit starts once the initial build is in. Fixes, improvements and additions land through the week of Nov 2. First version launches when this clears."
+      ]
+    },
+    "w8-0": {
+      "d": "End of Oleg’s second week.",
+      "x": []
+    },
+    "w8-1": {
+      "d": "First version out.",
+      "x": [
+        "Sequence: Ryan first pass → Tarek/Brian/Mark review → Jenni finalizes (2 wks) → Ryan + Claude Code (1 wk) → Oleg audit (2 wks) → launch."
+      ]
+    },
+    "w8-2": {
+      "d": "",
+      "x": []
+    }
+  },
+  "doneSeed": {
+    "w0-0": true,
+    "w0-1": true,
+    "w0-2": true,
+    "w0-3": true,
+    "w0-4": true,
+    "w0-5": true,
+    "w0-6": true,
+    "w0-7": true,
+    "w0-8": true,
+    "w0-9": true,
+    "w0-10": true,
+    "w0-11": true,
+    "w0-12": true,
+    "w0-13": true,
+    "w0-14": true,
+    "w0-15": true,
+    "w2-1": true
+  },
+  "workstreams": [
+    {
+      "name": "Brand / name",
+      "owner": "Ryan + Brian → Pineapple",
+      "d": "yellow"
+    },
+    {
+      "name": "Wireframe / MVP",
+      "owner": "Ryan + Brian",
+      "d": "yellow"
+    },
+    {
+      "name": "Onboarding",
+      "owner": "Brian + Lizzie · Jeff (TBD)",
+      "d": "yellow"
+    },
+    {
+      "name": "Build / code",
+      "owner": "Ryan (Claude Code) → Oleg audit",
+      "d": "grey"
+    },
+    {
+      "name": "Map of Me",
+      "owner": "Ryan + Brian + Mark",
+      "d": "grey"
+    },
+    {
+      "name": "Model",
+      "owner": "Mark",
+      "d": "green"
+    },
+    {
+      "name": "UI/UX",
+      "owner": "Ryan → Jenni (W3)",
+      "d": "yellow"
+    },
+    {
+      "name": "Second brain",
+      "owner": "Oleg",
+      "d": "green"
+    },
+    {
+      "name": "Privacy / security",
+      "owner": "Mark + Tarek",
+      "d": "yellow"
+    },
+    {
+      "name": "Community",
+      "owner": "Ryan + Brian",
+      "d": "grey"
+    },
+    {
+      "name": "Legal / entity",
+      "owner": "Sarah + Ryan",
+      "d": "yellow"
+    },
+    {
+      "name": "Deck",
+      "owner": "Ryan + Brian",
+      "d": "grey"
+    },
+    {
+      "name": "Data room",
+      "owner": "Ryan",
+      "d": "grey"
+    },
+    {
+      "name": "Investors",
+      "owner": "Ryan + Brian",
+      "d": "grey"
+    },
+    {
+      "name": "Advisors",
+      "owner": "Ryan + Brian",
+      "d": "yellow"
+    },
+    {
+      "name": "Partners / super nodes",
+      "owner": "Ryan + Brian",
+      "d": "grey"
+    },
+    {
+      "name": "AWS funding (ML Go)",
+      "owner": "Ryan + Jack",
+      "d": "yellow"
+    },
+    {
+      "name": "Go-to-market",
+      "owner": "Ryan + Brian",
+      "d": "grey"
+    },
+    {
+      "name": "Hiring (developer)",
+      "owner": "Ryan",
+      "d": "yellow"
+    },
+    {
+      "name": "User testing",
+      "owner": "Ryan + Brian",
+      "d": "yellow"
+    },
+    {
+      "name": "Website + socials",
+      "owner": "Ryan + Brian",
+      "d": "grey"
+    },
+    {
+      "name": "Budget / use of funds",
+      "owner": "Ryan + Brian",
+      "d": "yellow"
+    }
+  ],
+  "review": [
+    {
+      "title": "Priorities + decisions",
+      "prompts": [
+        "What are the three most important outcomes this week?",
+        "What changed since last week?",
+        "What decisions must Ryan + Brian make?",
+        "What is blocking the critical path?",
+        "What are we deliberately not doing?"
+      ]
+    },
+    {
+      "title": "Product",
+      "prompts": [
+        "Status: green / yellow / red?",
+        "Current milestone and next milestone?",
+        "Biggest blocker?",
+        "Decision required?"
+      ]
+    },
+    {
+      "title": "Model",
+      "prompts": [
+        "What improved?",
+        "What is failing?",
+        "What does Mark need?"
+      ]
+    },
+    {
+      "title": "Onboarding / practitioners",
+      "prompts": [
+        "Status?",
+        "Current learning?",
+        "Decision required?"
+      ]
+    },
+    {
+      "title": "UI/UX",
+      "prompts": [
+        "Deliverable this week?",
+        "Risk?"
+      ]
+    },
+    {
+      "title": "Brand",
+      "prompts": [
+        "Current milestone?",
+        "Decision required?"
+      ]
+    },
+    {
+      "title": "Community",
+      "prompts": [
+        "Invited / started / completed onboarding / interviewed?",
+        "Major learning?"
+      ]
+    },
+    {
+      "title": "Fundraising",
+      "prompts": [
+        "Deck? Data room? Investor list?",
+        "Warm intros? Friendly pitches?",
+        "Meetings scheduled?"
+      ]
+    },
+    {
+      "title": "Second brain",
+      "prompts": [
+        "What is working?",
+        "Next integration?"
+      ]
+    },
+    {
+      "title": "Privacy / security",
+      "prompts": [
+        "Status?",
+        "Open risks?"
+      ]
+    },
+    {
+      "title": "Budget",
+      "prompts": [
+        "Committed / paid / remaining (of $40K)?",
+        "New decision required?"
+      ]
+    },
+    {
+      "title": "Top 3 blockers + next 7 days",
+      "prompts": [
+        "Name the top 3 blockers.",
+        "Commit to the next 7 days — three outcomes."
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "id": "b1",
+      "title": "Jeff meeting not scheduled",
+      "needs": "Review where onboarding stands and walk him through the onboarding experience PDF. Needs: a date on the calendar this week or next.",
+      "meta": "BLOCKS W3 · Ryan"
+    },
+    {
+      "id": "b2",
+      "title": "Corporate umbrella — process weight unknown",
+      "needs": "If incorporating the umbrella is intensive we may go with a different corporate structure. Needs: a call on structure before the attorney is engaged Oct 2.",
+      "meta": "BLOCKS LEGAL · Ryan"
+    },
+    {
+      "id": "b3",
+      "title": "Jenni engaged part-time from Sep 28",
+      "needs": "Production-ready UI/UX by Oct 16 assumes Ryan, Brian and Tarek resolve most of the work first and Jenni polishes. Needs: the wireframe locked Sep 25, no slippage.",
+      "meta": "BLOCKS OCT 16 · Ryan + Brian"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d1",
+      "title": "Entity type — LLC vs. C Corp vs. B Corp",
+      "meta": "RYAN + BRIAN · BY SEP 25",
+      "desc": "The entity has to be set up before the raise opens. Decide the structure, then file. If the process is intensive we may go with a different corporate structure."
+    },
+    {
+      "id": "d8",
+      "title": "Accelerators — worth it for the connections?",
+      "meta": "RYAN + BRIAN · BY OCT 2",
+      "desc": "Not for what the program teaches, but for the relationships the right accelerator would form. Evaluate and decide before the raise opens."
+    },
+    {
+      "id": "d7",
+      "title": "Advisors — do we ask them to invest?",
+      "meta": "RYAN + BRIAN · BY SEP 25",
+      "desc": "Advisors who sign up without money in often turn out too busy to contribute. Decide the ask — pure advisory, advisory plus a check, or upside for content creators and super nodes — before outreach begins."
+    },
+    {
+      "id": "d6",
+      "title": "Practitioner scope — feedback on our work vs. their own version",
+      "meta": "RYAN + BRIAN · BY SEP 21",
+      "desc": "Leaning toward Lizzie and Jeff reacting to what we are building rather than producing their own onboarding experience. We have more context on what we are building than they will; the invitation is into our open questions. Compresses their ask from two weeks each to about one."
+    },
+    {
+      "id": "d2",
+      "title": "Fundraising attorney — which of the two we engage",
+      "meta": "RYAN · BY OCT 2",
+      "desc": "Both attorneys under consideration have been spoken to. Decide and engage for the fundraising docs."
+    },
+    {
+      "id": "d3",
+      "title": "Map of Me reveal — full reveal vs. progressive reveal",
+      "meta": "R + B + MARK · BY OCT 2",
+      "desc": "The Oct 2 prototype should establish the flow and what we serve up. High-fidelity designs follow the week of Oct 12."
+    },
+    {
+      "id": "d4",
+      "title": "Name — new name vs. KOVA-for-now",
+      "meta": "RYAN + BRIAN · BY OCT 23",
+      "desc": "Pineapple should reach a name or finalists before the first pitch. If it is not settled, pitch as KOVA and treat the name as in progress."
+    },
+    {
+      "id": "d5",
+      "title": "Second Brain — first proactive workflow",
+      "meta": "MARK + TEAM · BY OCT 9",
+      "desc": "One workflow, chosen off what the prioritized use cases actually surface. Not eight agents."
+    }
+  ],
+  "budget": [
+    {
+      "id": "bg1",
+      "name": "Brand partner (Pineapple)",
+      "amt": 10000,
+      "status": "committed"
+    },
+    {
+      "id": "bg2",
+      "name": "UI/UX partner (Jenni)",
+      "amt": 0,
+      "status": "planned"
+    }
+  ]
+}
